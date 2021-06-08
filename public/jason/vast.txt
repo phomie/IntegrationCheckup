@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+<Ad id="710744896">
+    <Wrapper fallbackOnNoAd="true">
+        <AdSystem>SmartX</AdSystem>
+		<VASTAdTagURI><![CDATA[https://ups.xplosion.de/data/vast?event_id=vast_xml&gdpr_consent=CPHeQTZPHeQX6ADABBENBdCsAP_AAH_AAAAAHLtf_X_fbX9j-_59__t0eY1f9_7_v2wzjheds-8NyN_X_L0X_2E7PF36pq4KuR4ku3bBIQNtHOnUTUmx6IlVqTPsak2Mr7NKJ7LEmnsZe2dYGHtfn9VT-ZKZ797v_9f73_______79_3____3_v_____-__4HLgEmGpfABdiWOBJNGlUKIEIVhIdACACigGFomsICFwU7KwCPUEDABCagIwIgQYgoxYBAAIBAEhEQEgB4IBEARAIAAQAqQEIACJAEFgBYGAQACgGhYARQBCBIQZHBUcpgQESLRQTyVgCUXexhhCGUWAFAo_oAAA.YAAAAAAAAAA&optout=0&_sid=99660&vastadtaguri=https://ad.sxp.smartclip.net/select%3ftype%3dvast3%26s%3dbcnfreundin.de%26sz%3dpre%26ang_contxt%3d1%26fwd_dt1%3d%26fwd_dt2%3d%26fwd_sz%3dpre%26emq%3d__SEGMENTS__%26optout%3d0%26ang_tpl%3d2%26format%3dautoplay%26waterfall%3d%26adkeyword%3d%26consent%3dCPHeQTZPHeQX6ADABBENBdCsAP_AAH_AAAAAHLtf_X_fbX9j-_59__t0eY1f9_7_v2wzjheds-8NyN_X_L0X_2E7PF36pq4KuR4ku3bBIQNtHOnUTUmx6IlVqTPsak2Mr7NKJ7LEmnsZe2dYGHtfn9VT-ZKZ797v_9f73_______79_3____3_v_____-__4HLgEmGpfABdiWOBJNGlUKIEIVhIdACACigGFomsICFwU7KwCPUEDABCagIwIgQYgoxYBAAIBAEhEQEgB4IBEARAIAAQAqQEIACJAEFgBYGAQACgGhYARQBCBIQZHBUcpgQESLRQTyVgCUXexhhCGUWAFAo_oAAA.YAAAAAAAAAA%26ang_ref%3dhttps%253A%252F%252Fwww.freundin.de%252Flifestyle-was-taeglich-putzen%26rnd%3d6759171%26hostSiteUrl%3dhttps%253A%252F%252Fwww.freundin.de%252Flifestyle-was-taeglich-putzen]]>
+		</VASTAdTagURI>
+		<Error></Error>
+		<Impression><![CDATA[https://cdn.smartclip.net/assets/9999999/blank.gif]]></Impression>
+		<Creatives>
+			<Creative AdID="">
+			<Linear>
+			<VideoClicks>
+				<ClickTracking>
+				</ClickTracking>
+			</VideoClicks>
+			<TrackingEvents>
+			</TrackingEvents>
+			</Linear>
+			</Creative>
+		</Creatives>
+        <Extensions>
+        <Extension type="waterfall" fallback_index="0"/>
+   			</Extensions>
+    </Wrapper>
+</Ad>
+<Ad id="710743696">
+    <Wrapper>
+        <AdSystem>SmartX</AdSystem>
+       	<VASTAdTagURI><![CDATA[https://ad.sxp.smartclip.net/select?type=vast3&s=freundintc&sz=pre&fwd_sz=pre&ang_contxt=1&backfill=yieldlab&partner=&format=autoplay&waterfall=&adkeyword=&optout=0&ang_tpl=2&consent=CPHeQTZPHeQX6ADABBENBdCsAP_AAH_AAAAAHLtf_X_fbX9j-_59__t0eY1f9_7_v2wzjheds-8NyN_X_L0X_2E7PF36pq4KuR4ku3bBIQNtHOnUTUmx6IlVqTPsak2Mr7NKJ7LEmnsZe2dYGHtfn9VT-ZKZ797v_9f73_______79_3____3_v_____-__4HLgEmGpfABdiWOBJNGlUKIEIVhIdACACigGFomsICFwU7KwCPUEDABCagIwIgQYgoxYBAAIBAEhEQEgB4IBEARAIAAQAqQEIACJAEFgBYGAQACgGhYARQBCBIQZHBUcpgQESLRQTyVgCUXexhhCGUWAFAo_oAAA.YAAAAAAAAAA&ang_ref=https%253A%252F%252Fwww.freundin.de%252Flifestyle-was-taeglich-putzen&rnd=596944]]>
+		</VASTAdTagURI>
+		<Error></Error>
+		<Impression><![CDATA[https://cdn.smartclip.net/assets/9999999/blank.gif]]></Impression>
+		<Creatives>
+			<Creative AdID="">
+			<Linear>
+			<VideoClicks>
+				<ClickTracking>
+				</ClickTracking>
+			</VideoClicks>
+			<TrackingEvents>
+			</TrackingEvents>
+			</Linear>
+			</Creative>
+		</Creatives>
+       <Extensions>
+        <Extension type="waterfall" fallback_index="1"/>
+   </Extensions>
+    </Wrapper>
+</Ad>
+<Ad id="710744896">
+    <Wrapper fallbackOnNoAd="true">
+        <AdSystem>SmartX</AdSystem>
+		<VASTAdTagURI><![CDATA[https://ad.sxp.smartclip.net/select?type=vast3&s=freundintc&sz=pre&fwd_sz=pre&ang_contxt=1&backfill=google&partner=&format=autoplay&waterfall=&adkeyword=&optout=0&ang_tpl=2&consent=CPHeQTZPHeQX6ADABBENBdCsAP_AAH_AAAAAHLtf_X_fbX9j-_59__t0eY1f9_7_v2wzjheds-8NyN_X_L0X_2E7PF36pq4KuR4ku3bBIQNtHOnUTUmx6IlVqTPsak2Mr7NKJ7LEmnsZe2dYGHtfn9VT-ZKZ797v_9f73_______79_3____3_v_____-__4HLgEmGpfABdiWOBJNGlUKIEIVhIdACACigGFomsICFwU7KwCPUEDABCagIwIgQYgoxYBAAIBAEhEQEgB4IBEARAIAAQAqQEIACJAEFgBYGAQACgGhYARQBCBIQZHBUcpgQESLRQTyVgCUXexhhCGUWAFAo_oAAA.YAAAAAAAAAA&ang_ref=https%253A%252F%252Fwww.freundin.de%252Flifestyle-was-taeglich-putzen&rnd=5063210]]>
+		</VASTAdTagURI>
+		<Error></Error>
+		<Impression><![CDATA[https://cdn.smartclip.net/assets/9999999/blank.gif]]></Impression>
+		<Creatives>
+			<Creative AdID="">
+			<Linear>
+			<VideoClicks>
+				<ClickTracking>
+				</ClickTracking>
+			</VideoClicks>
+			<TrackingEvents>
+			</TrackingEvents>
+			</Linear>
+			</Creative>
+		</Creatives>
+        <Extensions>
+        <Extension type="waterfall" fallback_index="2"/>
+   			</Extensions>
+    </Wrapper>
+</Ad>
+<Ad id="710744896">
+    <Wrapper fallbackOnNoAd="true">
+        <AdSystem>SmartX</AdSystem>
+		<VASTAdTagURI><![CDATA[https://ad.sxp.smartclip.net/select?type=vast3&s=freundintc&sz=pre&fwd_sz=pre&ang_contxt=1&backfill=smartstream&partner=&format=autoplay&waterfall=&adkeyword=&optout=0&ang_tpl=2&consent=CPHeQTZPHeQX6ADABBENBdCsAP_AAH_AAAAAHLtf_X_fbX9j-_59__t0eY1f9_7_v2wzjheds-8NyN_X_L0X_2E7PF36pq4KuR4ku3bBIQNtHOnUTUmx6IlVqTPsak2Mr7NKJ7LEmnsZe2dYGHtfn9VT-ZKZ797v_9f73_______79_3____3_v_____-__4HLgEmGpfABdiWOBJNGlUKIEIVhIdACACigGFomsICFwU7KwCPUEDABCagIwIgQYgoxYBAAIBAEhEQEgB4IBEARAIAAQAqQEIACJAEFgBYGAQACgGhYARQBCBIQZHBUcpgQESLRQTyVgCUXexhhCGUWAFAo_oAAA.YAAAAAAAAAA&ang_ref=https%253A%252F%252Fwww.freundin.de%252Flifestyle-was-taeglich-putzen&rnd=7347220]]>
+		</VASTAdTagURI>
+		<Error></Error>
+		<Impression><![CDATA[https://cdn.smartclip.net/assets/9999999/blank.gif]]></Impression>
+		<Creatives>
+			<Creative AdID="">
+			<Linear>
+			<VideoClicks>
+				<ClickTracking>
+				</ClickTracking>
+			</VideoClicks>
+			<TrackingEvents>
+			</TrackingEvents>
+			</Linear>
+			</Creative>
+		</Creatives>
+        <Extensions>
+        <Extension type="waterfall" fallback_index="3"/>
+   			</Extensions>
+    </Wrapper>
+</Ad>
+<Ad id="710744896">
+    <Wrapper fallbackOnNoAd="true">
+        <AdSystem>SmartX</AdSystem>
+		<VASTAdTagURI><![CDATA[https://ad.sxp.smartclip.net/select?type=vast3&s=freundintc&sz=pre&fwd_sz=pre&ang_contxt=1&backfill=sevenone&partner=&format=autoplay&waterfall=&adkeyword=&optout=0&ang_tpl=2&consent=CPHeQTZPHeQX6ADABBENBdCsAP_AAH_AAAAAHLtf_X_fbX9j-_59__t0eY1f9_7_v2wzjheds-8NyN_X_L0X_2E7PF36pq4KuR4ku3bBIQNtHOnUTUmx6IlVqTPsak2Mr7NKJ7LEmnsZe2dYGHtfn9VT-ZKZ797v_9f73_______79_3____3_v_____-__4HLgEmGpfABdiWOBJNGlUKIEIVhIdACACigGFomsICFwU7KwCPUEDABCagIwIgQYgoxYBAAIBAEhEQEgB4IBEARAIAAQAqQEIACJAEFgBYGAQACgGhYARQBCBIQZHBUcpgQESLRQTyVgCUXexhhCGUWAFAo_oAAA.YAAAAAAAAAA&ang_ref=https%253A%252F%252Fwww.freundin.de%252Flifestyle-was-taeglich-putzen&rnd=3351567]]>
+		</VASTAdTagURI>
+		<Error></Error>
+		<Impression><![CDATA[https://cdn.smartclip.net/assets/9999999/blank.gif]]></Impression>
+		<Creatives>
+			<Creative AdID="">
+			<Linear>
+			<VideoClicks>
+				<ClickTracking>
+				</ClickTracking>
+			</VideoClicks>
+			<TrackingEvents>
+			</TrackingEvents>
+			</Linear>
+			</Creative>
+		</Creatives>
+        <Extensions>
+        <Extension type="waterfall" fallback_index="4"/>
+   			</Extensions>
+    </Wrapper>
+</Ad>
+</VAST>
