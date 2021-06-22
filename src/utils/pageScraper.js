@@ -8,7 +8,7 @@ const db = require("../db.js");
 
 
 const scraperObject = {
-    url: "",
+    url: "freundin.de",
     async scraper(browser, category) {
         let page = await browser.newPage();
         console.log(`Navigating to ${this.url}...`);

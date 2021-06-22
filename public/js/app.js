@@ -35,10 +35,17 @@ setTimeout(function() {
     fetch("http://localhost:3002/resultsofScrap").then(async response => {
         try {
             const data = await response.json()
-            utctocet = data[0].created_at
+            var utctocet = new Date(data[0].created_at)
             console.log('utctocet', utctocet);
             var localDate = new Date();
-            console.log('localDate', localDate);
+            var diffInMs = localDate - utctocet;
+            var msInmin = Math.floor(diffInMs / 1000 / 60)
+
+            if (msInmin < 5) {
+                alert("itfits and i can proceed with the rest");
+            } else {
+                alert("do it again")
+            }
 
 
             // const anyTime = new Date(thedateofscraepe).getTime();

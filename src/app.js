@@ -79,18 +79,6 @@ app.post('/results', upload.single('userSearchInput', 'screensizes'), function(r
         console.log(e, 'error');
     }
 
-    /*
-    db.lastEntry().then(result => {
-        res.render("scrapedResults", {
-
-            title: "RESULTS",
-            secTitle: "IntegrationCheck",
-
-            result: result.rows
-        })
-
-    })*/
-
 });
 
 app.get("", (req, res) => {
@@ -100,8 +88,6 @@ app.get("", (req, res) => {
         name: "Paste in the URL you are want to check, and see the magic happens",
         copyright: "created by the codingod marc",
     });
-
-
 });
 
 
@@ -115,38 +101,6 @@ app.get("/resultsofScrap", (req, res) => {
         }))
     })
 });
-/*
-app.get("/resultsofScrap", (req, res) => {
-    res.json({ data: new Date() });
-
-
-});
-
-/*
-app.get("/json", (req, res) => {
-
-  if (!req.query.student) {
-    return res.send({
-      error: "please give me a student",
-    });
-  }
-
-  //STEP3: READ the file an send it  
-  fs.readFile(thepathtojson, (err, data) => {
-    if (err) throw err;
-    let student = JSON.parse(data);
-    
-    
-
-    res.send({
-      student:student 
-    });
-  })
-})
-
-*/
-
-
 
 app.get("/weather", (req, res) => {
     if (!req.query.urladdress) {
@@ -154,36 +108,6 @@ app.get("/weather", (req, res) => {
             error: "you must provide an adress",
         });
     }
-
-    /*
-
-  geocode(
-    req.query.address,
-    (error, { latitutde, longitude, location } = {}) => {
-      if (error) {
-        return console.log(error);
-      }
-      forecast(latitutde, longitude, (error, forcastdata) => {
-        if (error) {
-          return console.log(error);
-        }
-        res.send({
-          forecast: forcastdata,
-          location: location,
-          address: req.query.address,
-        });
-      });
-    }
-  );
-*/
-    /*
-          res.send({
-              forecast:forcastdata, 
-              location:location,
-              address:req.query.address,
-      
-      
-          })*/
 });
 
 app.get("/about", (req, res) => {
