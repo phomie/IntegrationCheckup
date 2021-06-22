@@ -19,7 +19,7 @@ async function startBrowser() {
             ],
             defaultViewport: null,
 
-            slowMo: 2000
+            //  slowMo: 2500
         });
     } catch (err) {
         console.log("Could not create a browser instance => : ", err);

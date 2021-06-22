@@ -30,36 +30,46 @@ urlcollectorform.addEventListener("submit", (e) => {
 });
 */
 
-  //try
+//try
+setTimeout(function() {
+    fetch("http://localhost:3002/resultsofScrap").then(async response => {
+        try {
+            const data = await response.json()
+            utctocet = data[0].created_at
+            console.log('utctocet', utctocet);
+            var localDate = new Date();
+            console.log('localDate', localDate);
 
-  fetch("http://localhost:3001/resultsofScrap").then(async response => {
-    try {
-     const data = await response.json()
-     console.log('response data?', data)
-     console.log('response data?', data.scrapedData)
-     console.log('response dataaSAdslots?', data.scrapedData.Checked_Elements[0])
-     console.log('response dataaSAdslots?', data.scrapedData.Checked_Elements[1])
-     console.log('response dataaSAdslots?', data.scrapedData.Checked_Elements[2])
-     console.log('response dataaSAdslots?', data.scrapedData.Checked_Elements[3])
-     objective = data.scrapedData;
-     console.log('objective', typeof(objective));
-     for (let scrapdata of Object.keys(objective)) {
-        scrapdata = objective[scrapdata];
-      console.log(JSON.stringify(scrapdata[0].dataLayer));
-      jsonOne.textContent = "atf-ContentTyp:" + JSON.stringify(scrapdata[0].dataLayer);
-      jsonTwo2.textContent = "atf-Channel:" + JSON.stringify(scrapdata[1].dataLayer2);
-      
-      jsonTwo3.textContent = "adslots:" + JSON.stringify(scrapdata[2].Adslots);
-  }  
-   } catch(error) {
-     console.log('Error happened here!')
-     console.error(error)
-   }
-   
-  })
 
- toProof =  document.querySelector("#screanchoise").value
-if(toProof=="2560x1440"){
-console.log("Desktop")
+            // const anyTime = new Date(thedateofscraepe).getTime();
+            //const currentTime = new Date().getTime() + 180000;
+            //if (currentTime > anyTime) {
+            //    console.log("tooold")
+            // }
 
-}
+
+            console.log('response data?', data)
+            console.log('response data?', data[0])
+                //console.log('response dataaSAdslots?', data[0].created_at)
+                //console.log('data[0].created_at', typeof(data[0].created_at));
+
+
+            console.log('data[0].slots[0]', data[0].slots.Adslots)
+            console.log('response dataaSAdslots?', data[0].atf_channel)
+            console.log('response dataaSAdslots?', data[0].contenttyp)
+            console.log('response dataaSAdslots?', data[0].adunitstructure)
+            objective = data[0];
+
+            jsonOne.textContent = "atf-ContentTyp:" + JSON.stringify(data[0].contenttyp);
+            jsonTwo2.textContent = "atf-Channel:" + JSON.stringify(data[0].atf_channel);
+
+            jsonTwo3.textContent = "adslots:" + JSON.stringify(data[0].slots.Adslots);
+            jsonTwo4.textContent = "time:" + data[0].created_at;
+            console.log('JSON.stringify(localDate)', );
+        } catch (error) {
+            console.log('Error happened here!')
+            console.error(error)
+        }
+
+    })
+}, 3000);

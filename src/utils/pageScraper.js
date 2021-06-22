@@ -2,6 +2,9 @@ const fetch = require("node-fetch");
 const path = require('path');
 let baseDir = path.join(__dirname, '../../public/jason/vast.txt');
 const fs = require('fs');
+const db = require("../db.js");
+
+
 
 
 const scraperObject = {
@@ -14,12 +17,7 @@ const scraperObject = {
         //var tracing = JSON.parse(await page.tracing.stop());
         //console.log('tracing', tracing);
 
-
-
-
         const response = await page.goto(this.url, { waitUntil: 'networkidle0' });
-
-
 
         var togetthehost = this.url
         const { hostname } = new URL(togetthehost)
@@ -46,7 +44,6 @@ const scraperObject = {
         //*** ADslots****************************************************
         const slots = await page.evaluate(async() => {
 
-
             let adSlotObj = {};
             const result = {};
             const element = document.querySelectorAll("atf-ad-slot");
@@ -60,8 +57,11 @@ const scraperObject = {
             return result;
         });
 
+
+
+
         //*** dataLayerProof****************************************************
-        const dataLayer = await page.evaluate(async() => {
+        const atf_channel = await page.evaluate(async() => {
 
             function findObjectByKey(array, key) {
                 for (var i = 0; i < array.length; i++) {
@@ -85,7 +85,7 @@ const scraperObject = {
 
         });
 
-        const dataLayer2 = await page.evaluate(async() => {
+        const contentTyp = await page.evaluate(async() => {
 
 
             function findObjectByKey(array, key) {
@@ -107,12 +107,7 @@ const scraperObject = {
                 }
                 return GetAdKeyValue()
             }
-
-
         });
-
-
-
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
         await page.$("div[id^='google_ads_iframe_'] iframe").then(() => {
@@ -120,7 +115,7 @@ const scraperObject = {
 
         })
 
-        const theAdunit = await page.evaluate(async() => {
+        const adunitstructure = await page.evaluate(async() => {
                 let adadunitObj = {};
                 console.log('adadunitObj', adadunitObj);
                 let result1 = {};
@@ -135,21 +130,15 @@ const scraperObject = {
                 return result1;
             })
             // console.log('thediv', thediv);
-        console.log('theAdunit', theAdunit);
+        console.log('theAdunit', adunitstructure);
         //VASTCHECK****************************************
-
         try {
             thevidopla = await page.$("div.item-media__wrapper").then(console.log("vid found"))
             await page.evaluate(() => {
                 document.querySelector("div.item-media__wrapper").scrollIntoView({ block: 'start', behavior: 'smooth' });
-
             })
 
-
-
-
             await page.on('response', async response => {
-
                 therespo = response.url().endsWith('&format=autoplay')
                 if (therespo) {
                     console.log('\n 🚀 We got one!: ', response.url())
@@ -160,21 +149,18 @@ const scraperObject = {
                     return theVast = fetch(thrUrl, { "credentials": "include", "headers": { "accept": "application/xml, text/xml, */*; q=0.01", "accept-language": "pl;q=1.3592", "x-requested-with": "XMLHttpRequest" }, "referrerPolicy": "no-referrer-when-downgrade", "body": null, "method": "GET", "mode": "cors" })
                         .then(response => {
                             return response.text();
-                        }).then(function(data) {
-
-                            fs.writeFile(baseDir, data, function(err) {
+                        }).then(function(vast_result) {
+                            //-----------------DB-Func-------------------------------------------
+                            db.resultsVastData(vast_result)
+                            fs.writeFile(baseDir, vast_result, function(err) {
                                 if (err) {
                                     return console.log(err);
                                 }
-                                console.log("The data has been scraped and saved successfully! View it at '../jason/bookdata.json'");
+                                console.log("The data has been scraped and saved successfully! View it at '../jason/vast.txt'");
                             });
-
-
                             // console.log(data);
                         });
-
                 }
-
             })
 
 
@@ -194,15 +180,23 @@ const scraperObject = {
 
         }
 
+        console.log('dataLayer2', contentTyp);
+        console.log('dataLayer', atf_channel);
+        console.log('theAdunit', adunitstructure);
 
-        // scroll selector into view
 
-        console.log('dataLayer2', dataLayer2);
-        console.log('dataLayer', dataLayer);
-        //console.log('slots', slots);
-        console.log('theAdunit', theAdunit);
 
-        scrapedData.push({ dataLayer }, { dataLayer2 }, slots, { theAdunit });
+        //-----------------DB-Func-------------------------------------------
+        db.resultsData(slots, atf_channel, contentTyp, adunitstructure)
+
+
+
+        //-----------------------------------------------------------------------
+
+
+
+
+        scrapedData.push({ atf_channel }, { contentTyp }, slots, { adunitstructure });
 
         async function scrapeCurrentPage() {
             await page.close();

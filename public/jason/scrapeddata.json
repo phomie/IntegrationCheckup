@@ -2,28 +2,28 @@
 	"scrapedData": {
 		"Checked_Elements": [
 			{
-				"dataLayer": {
+				"atf_channel": {
 					"atf-channel": "lifestyle"
 				}
 			},
 			{
-				"dataLayer2": {
+				"contentTyp": {
 					"atf-contentType": "article"
 				}
 			},
 			{
 				"Adslots": {
-					"0": "<atf-ad-slot id=\"adtech-v2-mzw6g7s2\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"top\" atf-formatsize=\"1000x450\"",
-					"1": "<atf-ad-slot id=\"adtech-v2-9wkwjeb7\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
-					"2": "<atf-ad-slot id=\"adtech-v2-1dl0gn9n\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
-					"3": "<atf-ad-slot id=\"adtech-v2-oreczdrw\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
-					"4": "<atf-ad-slot id=\"adtech-v2-zy8ma4wj\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
-					"5": "<atf-ad-slot id=\"adtech-v2-fudqzqmv\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"vertical\" atf-formatsize=\"301x1050\"",
-					"6": "<atf-ad-slot id=\"adtech-v2-8dzxkw6s\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"footer\" atf-formatsize=\"4x4\" atf-formatnote=\"special\""
+					"0": "<atf-ad-slot id=\"adtech-v2-ocn7re92\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"top\" atf-formatsize=\"1000x450\"",
+					"1": "<atf-ad-slot id=\"adtech-v2-gbt8t9w8\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
+					"2": "<atf-ad-slot id=\"adtech-v2-tylofl5l\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
+					"3": "<atf-ad-slot id=\"adtech-v2-o75hljmh\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
+					"4": "<atf-ad-slot id=\"adtech-v2-mo4kiw6d\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"content\" atf-formatsize=\"648x350\" atf-formatnote=\"special\"",
+					"5": "<atf-ad-slot id=\"adtech-v2-rtd3vnlj\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"vertical\" atf-formatsize=\"301x1050\"",
+					"6": "<atf-ad-slot id=\"adtech-v2-21hghxpd\" class=\"adtech-v2-factory-ad adtech-v2-default-view\" atf-format=\"footer\" atf-formatsize=\"4x4\" atf-formatnote=\"special\""
 				}
 			},
 			{
-				"theAdunit": {
+				"adunitstructure": {
 					"0": "id=\"google_ads_iframe_/40748507/sty_fre/lifestyle/article/picount_0__container__\"",
 					"1": "id=\"google_ads_iframe_/40748507/sty_fre/lifestyle/article/top_1_0__container__\"",
 					"2": "id=\"google_ads_iframe_/40748507/sty_fre/lifestyle/article/content_1_0__container__\"",
