@@ -16,67 +16,60 @@ const jsonTwo3 = document.querySelector("#jsonmessage4");
 const jsonTwo4 = document.querySelector("#jsonmessage5");
 const jsonTwo5 = document.querySelector("#jsonmessage6");
 const jsonTwo6 = document.querySelector("#jsonmessage7");
+const jsonTwo7 = document.querySelector("#jsonmessage8");
 
-//Overgive the json object i collected
-messageOne.textContent = "i am loading ";
+
 messageTwo.textContent = "";
-/*
-urlcollectorform.addEventListener("submit", (e) => {
-  e.preventDefault();
 
-  const lookfor = urlsearch.value;
-  console.log("lookfor", lookfor);
 
-});
-*/
+document.querySelector("#collectorform").addEventListener('submit', (event) => {
+    event.preventDefault();
 
-//try
-setTimeout(function() {
-    fetch("http://localhost:3002/resultsofScrap").then(async response => {
-        try {
-            const data = await response.json()
-            var utctocet = new Date(data[0].created_at)
-            console.log('utctocet', utctocet);
-            var localDate = new Date();
-            var diffInMs = localDate - utctocet;
-            var msInmin = Math.floor(diffInMs / 1000 / 60)
+    fetch(event.target.action, {
+            method: 'POST',
+            body: new URLSearchParams(new FormData(event.target)) // event.target is the form
 
-            if (msInmin < 5) {
-                alert("itfits and i can proceed with the rest");
-            } else {
-                alert("do it again")
+        }).then(async(resp) => {
+            console.log('resp', resp);
+            return resp.json();
+
+            /* if (resp !== "") {
+                return resp.json();
+
             }
+            if (resp == "") {
+                await resp.json().then(async() => {
+                    return resp.json()
+
+                })
+
+            } */
 
 
-            // const anyTime = new Date(thedateofscraepe).getTime();
-            //const currentTime = new Date().getTime() + 180000;
-            //if (currentTime > anyTime) {
-            //    console.log("tooold")
-            // }
+            // or resp.text() or whatever the server sends
+        })
+        .then(async(data) => {
 
+            console.log('data', data);
 
-            console.log('response data?', data)
-            console.log('response data?', data[0])
-                //console.log('response dataaSAdslots?', data[0].created_at)
-                //console.log('data[0].created_at', typeof(data[0].created_at));
-
-
-            console.log('data[0].slots[0]', data[0].slots.Adslots)
-            console.log('response dataaSAdslots?', data[0].atf_channel)
-            console.log('response dataaSAdslots?', data[0].contenttyp)
-            console.log('response dataaSAdslots?', data[0].adunitstructure)
-            objective = data[0];
+            jsonTwo5.textContent = "The displayed data is from the past 2 min    "
 
             jsonOne.textContent = "atf-ContentTyp:" + JSON.stringify(data[0].contenttyp);
             jsonTwo2.textContent = "atf-Channel:" + JSON.stringify(data[0].atf_channel);
 
             jsonTwo3.textContent = "adslots:" + JSON.stringify(data[0].slots.Adslots);
             jsonTwo4.textContent = "time:" + data[0].created_at;
-            console.log('JSON.stringify(localDate)', );
-        } catch (error) {
-            console.log('Error happened here!')
-            console.error(error)
-        }
+            jsonTwo6.textContent = "url:" + data[0].togetthehost
+            jsonTwo7.textContent = "random:" + data[0].findtheright
+            console.log('data[0].togetthehost', data[0].togetthehost);
 
-    })
-}, 3000);
+        })
+
+
+    .catch((error) => {
+        console.log('error', error);
+        // TODO handle error
+    });
+
+
+})

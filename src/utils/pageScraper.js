@@ -59,7 +59,6 @@ const scraperObject = {
 
 
 
-
         //*** dataLayerProof****************************************************
         const atf_channel = await page.evaluate(async() => {
 
@@ -88,6 +87,7 @@ const scraperObject = {
         const contentTyp = await page.evaluate(async() => {
 
 
+
             function findObjectByKey(array, key) {
                 for (var i = 0; i < array.length; i++) {
                     if (array[i][key]) {
@@ -108,6 +108,7 @@ const scraperObject = {
                 return GetAdKeyValue()
             }
         });
+
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
         await page.$("div[id^='google_ads_iframe_'] iframe").then(() => {
@@ -184,10 +185,12 @@ const scraperObject = {
         console.log('dataLayer', atf_channel);
         console.log('theAdunit', adunitstructure);
 
-
-
-        //-----------------DB-Func-------------------------------------------
-        db.resultsData(slots, atf_channel, contentTyp, adunitstructure)
+        findtheright = this.findtheright
+        console.log('findtherightcontentTyp', findtheright);
+        contentTyp1 = JSON.stringify(contentTyp)
+        atf_channel1 = JSON.stringify(atf_channel)
+            //-----------------DB-Func-------------------------------------------
+        await db.resultsData(findtheright, togetthehost, slots, atf_channel1, contentTyp1, adunitstructure)
 
 
 
@@ -196,7 +199,7 @@ const scraperObject = {
 
 
 
-        scrapedData.push({ atf_channel }, { contentTyp }, slots, { adunitstructure });
+        // scrapedData.push({ atf_channel }, { contentTyp }, slots, { adunitstructure });
 
         async function scrapeCurrentPage() {
             await page.close();

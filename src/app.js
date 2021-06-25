@@ -5,7 +5,7 @@ const hbs = require("hbs");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 var multer = require('multer')
-const tocheckthepath = require("../public/jason/scrapeddata.json")
+    //const tocheckthepath = require("public/jason/scrapeddata")
 var upload = multer({ dest: '../public/jason/url.json' })
 const scraperObject = require("./utils/pageScraper")
 const browserObject = require('./utils/browser');
@@ -17,6 +17,7 @@ const db = require('./db')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
+
 //Path to public folders
 const publicDir = path.join(__dirname, "../public");
 const root_Dir = path.join(__dirname, "../src");
@@ -26,24 +27,17 @@ const partialspath = path.join(__dirname, "../templates/partials");
 
 const thepathtoscrappedjson = path.join(__dirname, "../public/jason/scrapeddata.json");
 
-var options = {
-    dotfiles: 'ignore',
-    etag: false,
-    extensions: ['htm', 'html'],
-    index: false,
-    maxAge: '1d',
-    redirect: false,
-    setHeaders: function(res, path, stat) {
-        Date.prototype.addHours = function(h) {
-            this.setHours(this.getHours() + h);
-            return this;
-        }
 
 
-        res.set('timestamp', new Date().addHours(2))
-    }
-}
-app.use(express.static(publicDir, options));
+
+app.use(express.static(publicDir));
+
+app.use(function(req, res, next) {
+    res.set({ 'Last-Modified': new Date() });
+    next()
+});
+
+
 //SetupHanldebar and views Location
 var exphbs = require('express-handlebars')
 app.set("view engine", "hbs");
@@ -54,32 +48,70 @@ hbs.registerHelper('json', function(context) {
     return JSON.stringify(context);
 });
 
-app.post('/results', upload.single('userSearchInput', 'screensizes'), function(req, res) {
+
+
+app.post('/results', upload.single('userSearchInput', 'screensizes'), async function(req, res) {
 
     var url = req.body.userSearchInput;
     var screenssizes = req.body.screensizes
     var sizes = screenssizes.split("x")
     width = sizes[0]
     height = sizes[1]
-    console.log('width', width);
-    console.log('height', height);
-    console.log('item', url);
 
 
     try {
+        findtheright = Math.floor(Math.random() * 1000000000 + 1);
+        console.log('Math.random()', Math.random());
+        console.log('findtheright', findtheright);
+        scraperObject.findtheright = findtheright
+        console.log('findtheright intheserver', scraperObject.findtheright);
+
 
         scraperObject.url = url;
         let browserInstance = browserObject.startBrowser();
         browserObject.width = width
         browserObject.height = height
-        scraperController(browserInstance)
+        await scraperController(browserInstance)
+
 
     } catch (e) {
-        console.log("Cant't stop webserver:", 'error'); // No server started
+        console.log("Cant't stop webserver:", 'error');
         console.log(e, 'error');
     }
-
+    // res.send("/scrapedResults")
+    db.lastEntry(findtheright).then(result => {
+        //console.log('result', result);
+        // console.log('result', result.rows[0].created_at);
+        // console.log('thetryinto', Object.keys(result.rows)[0]);
+        res.send(result.rows.map(row => {
+            return {
+                ...row,
+                created_at: new Date(row.created_at).toLocaleString('en', { timeZone: 'Europe/Berlin' })
+                    //findtheright: new Date(row.findtheright).toLocaleString('en', { timeZone: 'Europe/Berlin' })
+            }
+        }))
+    })
 });
+
+app.get("/resultsofScrap", (req, res) => {
+
+
+
+    //console.log('findtheright', findtheright);
+
+    db.lastEntry().then(result => {
+        // console.log('result', result.rows[0].created_at);
+        // console.log('thetryinto', Object.keys(result.rows)[0]);
+        res.send(result.rows.map(row => {
+            return {
+                ...row,
+                created_at: new Date(row.created_at).toLocaleString('en', { timeZone: 'Europe/Berlin' })
+                    //findtheright: new Date(row.findtheright).toLocaleString('en', { timeZone: 'Europe/Berlin' })
+            }
+        }))
+    })
+});
+
 
 app.get("", (req, res) => {
     res.render("index", {
@@ -90,18 +122,9 @@ app.get("", (req, res) => {
     });
 });
 
+/*
 
-app.get("/resultsofScrap", (req, res) => {
-    db.lastEntry().then(result => {
-        res.send(result.rows.map(row => {
-            return {
-                ...row,
-                created_at: new Date(row.created_at).toLocaleString('de', { timeZone: 'Europe/Berlin' })
-            }
-        }))
-    })
-});
-
+*/
 app.get("/weather", (req, res) => {
     if (!req.query.urladdress) {
         return res.send({

@@ -4,7 +4,9 @@ DROP TABLE IF EXISTS vastresults;
 
 CREATE TABLE jsonresults(
 id SERIAL PRIMARY KEY,
-created_at   Timestamp  DEFAULT CURRENT_TIMESTAMP,
+created_at TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+findtheright INTEGER NOT NULL UNIQUE ,
+togetthehost  VARCHAR NOT NULL,
 slots jsonb,
 atf_channel jsonb,
 contentTyp jsonb,
