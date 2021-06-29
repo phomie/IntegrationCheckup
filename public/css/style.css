@@ -43,6 +43,14 @@ h1 {
     MARGIN: 5PX;
 }
 
+.is-empty {
+    display: none;
+}
+
+.is-fueled {
+    display: block;
+}
+
 img {
     width: 400px;
     height: 400px;
@@ -62,6 +70,7 @@ a {
 }
 
 #searchBTN {
+    margin: 26px;
     background: WHEAT;
     border: 0.2px solid black;
     border-radius: 5px;
@@ -87,6 +96,8 @@ a {
     -webkit-box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
     box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
     cursor: pointer;
+    position: sticky;
+    margin-bottom: 25px;
 }
 
 #reload:active {
@@ -118,6 +129,42 @@ input[list] {
     width: 500px;
 }
 
-#jsonmessage9:empty {
-    background-color: tomato;
+.container {
+    margin: 15px;
+    display: grid;
+    margin-top: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 140px 311px 1fr 29px;
+    gap: 25px 0px;
+    grid-template-areas: "controller controller controller" "time type type" "adslots adslots adslots" "adunitstruc adunitstruc adunitstruc";
+}
+
+.showresult {
+    display: inline-block;
+    margin: 0 0.5rem;
+    animation: animate__zoomIn;
+    /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+    /* don't forget to set a duration! */
+}
+
+.controller {
+    position: absolute;
+    grid-area: controller;
+}
+
+.time {
+    grid-area: time;
+}
+
+.type {
+    grid-area: type;
+}
+
+.adslots {
+    grid-area: adslots;
+}
+
+.adunitstruc {
+    grid-area: adunitstruc;
 }

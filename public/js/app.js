@@ -20,7 +20,7 @@ const jsonTwo6 = document.querySelector("#jsonmessage7");
 const jsonTwo7 = document.querySelector("#jsonmessage8");
 
 
-messageTwo.textContent = "";
+//messageTwo.textContent = "";
 
 
 document.querySelector("#collectorform").addEventListener('submit', (event) => {
@@ -33,31 +33,48 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
         }).then(async(resp) => {
             console.log('resp', resp);
             return resp.json();
-
-            /* if (resp !== "") {
-                return resp.json();
-
-            }
-            if (resp == "") {
-                await resp.json().then(async() => {
-                    return resp.json()
-
-                })
-
-            } */
-
-
-            // or resp.text() or whatever the server sends
         })
         .then(async(data) => {
 
             console.log('data', data);
+            theadslotstring = JSON.stringify(data[0].slots.Adslots);
+            thesec = theadslotstring.replace(' "adslots:{"0":"" ', '');
+            console.log('thesec', thesec);
+            var slottys = thesec.split(',')
 
-            jsonTwo5.textContent = "The displayed data is from the past 2 min    "
 
+
+            slottys.forEach(function(item) {
+                var li = document.createElement("li");
+                var text = document.createTextNode(item);
+                li.appendChild(text);
+                document.getElementById("adslots").appendChild(li);
+            });
+
+            aduntistructure = JSON.stringify(data[0].adunitstructure)
+            adunitsplit = aduntistructure.split(',')
+            adunitsplit.forEach(function(item) {
+                var li = document.createElement("li");
+                var text = document.createTextNode(item);
+                li.appendChild(text);
+                document.getElementById("adunitstruc").appendChild(li);
+            });
+
+
+
+
+
+
+
+            jsonTwo5.textContent = "The displayed data is from the past 2 min    ";
             jsonOne.textContent = "atf-ContentTyp:" + JSON.stringify(data[0].contenttyp);
             jsonTwo2.textContent = "atf-Channel:" + JSON.stringify(data[0].atf_channel);
-            jsonTwo3.textContent = "adslots:" + JSON.stringify(data[0].slots.Adslots);
+            /* jsonTwo3.textContent = "adslots:" + slottys.forEach(function(item) {
+                var li = document.createElement("li");
+                var text = document.createTextNode(item);
+                li.appendChild(text);
+                document.getElementById("slots").appendChild(li);
+            });; */
             jsonTwo4.textContent = "time:" + data[0].created_at;
             jsonTwo6.textContent = "url:" + data[0].togetthehost;
             jsonTwo7.textContent = "random:" + data[0].findtheright;
@@ -80,5 +97,21 @@ reloadtButton.addEventListener("click", reload, false)
 
 function reload() {
     reload = location.reload();
-
 }
+
+
+emptypes = document.querySelectorAll(".result")[0]
+console.log('emptypes', emptypes);
+
+var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        console.log(mutation.type);
+    });
+});
+
+var config = { attributes: true, childList: true, characterData: true };
+
+observer.observe(emptypes, config);
+
+// später: Observation wieder einstellen
+observer.disconnect();
