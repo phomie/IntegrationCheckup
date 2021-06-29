@@ -57,16 +57,12 @@ app.post('/results', upload.single('userSearchInput', 'screensizes'), async func
     var sizes = screenssizes.split("x")
     width = sizes[0]
     height = sizes[1]
+    console.log('height', height);
 
 
     try {
         findtheright = Math.floor(Math.random() * 1000000000 + 1);
-        console.log('Math.random()', Math.random());
-        console.log('findtheright', findtheright);
         scraperObject.findtheright = findtheright
-        console.log('findtheright intheserver', scraperObject.findtheright);
-
-
         scraperObject.url = url;
         let browserInstance = browserObject.startBrowser();
         browserObject.width = width
@@ -78,12 +74,11 @@ app.post('/results', upload.single('userSearchInput', 'screensizes'), async func
         console.log("Cant't stop webserver:", 'error');
         console.log(e, 'error');
     }
-    // res.send("/scrapedResults")
+
     db.lastEntry(findtheright).then(result => {
-        //console.log('result', result);
-        // console.log('result', result.rows[0].created_at);
-        // console.log('thetryinto', Object.keys(result.rows)[0]);
+
         res.send(result.rows.map(row => {
+            console.log('row', row);
             return {
                 ...row,
                 created_at: new Date(row.created_at).toLocaleString('en', { timeZone: 'Europe/Berlin' })
@@ -93,15 +88,8 @@ app.post('/results', upload.single('userSearchInput', 'screensizes'), async func
     })
 });
 
-app.get("/resultsofScrap", (req, res) => {
-
-
-
-    //console.log('findtheright', findtheright);
-
+/* app.get("/resultsofScrap", (req, res) => {
     db.lastEntry().then(result => {
-        // console.log('result', result.rows[0].created_at);
-        // console.log('thetryinto', Object.keys(result.rows)[0]);
         res.send(result.rows.map(row => {
             return {
                 ...row,
@@ -110,15 +98,13 @@ app.get("/resultsofScrap", (req, res) => {
             }
         }))
     })
-});
-
-
+}); */
 app.get("", (req, res) => {
     res.render("index", {
-        title: "PageScrapper",
-        secTitle: "IntegrationCheck",
-        name: "Paste in the URL you are want to check, and see the magic happens",
-        copyright: "created by the codingod marc",
+        title: "IntegrationCheck",
+        secTitle: "",
+        name: "Paste in the URL you are want to check",
+        copyright: "adtechfactory",
     });
 });
 

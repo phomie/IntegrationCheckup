@@ -5,8 +5,9 @@
 <head>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" href="/img/faviconadtch.ico">
-   <!-- <script src="/public/js/app.js"></script>-->
-   
+    <!-- <script src="/public/js/app.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -14,14 +15,15 @@
     <div id="main-content">
         <h2>{{name}}</h2>
 
-    
 
 
-        <form action="/results" method="POST" id="collectorform" type="submit" enctype="multipart/form-data" onsubmit="" autocomplete="off">
 
+        <form action="/results" method="POST" id="collectorform" type="submit" enctype="multipart/form-data" onsubmit=""
+            autocomplete="off">
             <div class="data-list-input" style="width:190px;">
-                <select id="screanchoise" class="data-list-input" style="width:190px;" name="screensizes" onfocus="this.value=''">
-                    <option id="Desktop"  value="2560x1440">Desktop - 2186x1120</option>
+                <select id="screanchoise" class="data-list-input" style="width:190px;" name="screensizes"
+                    onfocus="this.value=''">
+                    <option id="Desktop" value="2560x1440">Desktop - 2560x1440</option>
                     <option id="SmallDesktop" value="2186x1120">SmallDesktop - 2186x1120</option>
                     <option id="SmallerDesktop" value="1320x852">SmallerDesktop - 1320x852</option>
                     <option id="ipad" value="768x1024">iPad - 768x1024</option>
@@ -31,31 +33,50 @@
             </div>
             <input type="text" name="userSearchInput" id="urlcollector">
             <button class="btn btn-outline-secondary" id="searchBTN"> 🤩Push The Magic Button🤩</button>
-
+            
         </form>
+ <button  id="reload"> 💀REFRESH THE PAGE 💀</button>
+        <div id="resultcontainer">
+            <p id="messagone"></p>
+            <p id="messagtwo"></p>
+            <div id="atf_sdkset" class="result">
+                <p id="jsonmessage9"></p>
+            </div>
+            <div id="Message" class="result">
+                <p id="jsonmessage6"></p>
+            </div>
+
+            <div id="time" class="result">
+                <p id="jsonmessage5"></p>
+            </div>
+            <div id="Contenttype" class="result">
+                <p id="jsonmessage1"></p>
+            </div>
+            <div id="" class="result">
+                <p id="jsonmessage2"></p>
+            </div>
+
+            <div id="channel" class="result">
+                <p id="jsonmessage3"></p>
+            </div>
+            <div id="slots" class="result">
+                <p id="jsonmessage4"></p>
+            </div>
+            <div id="slots" class="result">
+                <p id="jsonmessage7"></p>
+            </div>
+            <div id="random" class="result">
+                <p id="jsonmessage8"></p>
+            </div>
+        </div>
 
 
-         <p id="messagone"></p>
-        <p id="messagtwo"></p>
-        <p id="jsonmessage6"></p>
-
-        <p id="jsonmessage5"></p>
-        <p id="jsonmessage1"></p>
-        <p id="jsonmessage2"></p>
-        <p id="jsonmessage3"></p>
-        <p id="jsonmessage4"></p>
-        <p id="jsonmessage7"></p>
-        <p id="jsonmessage8"></p>
-        <p id="jsonmessage9"></p>
 
 
 
 
 
-
-        <button id="reload" type="button" >Show the results</button>
-
-<!--
+        <!--
 {{#each result }}
        <ul id="thesigner">
     
@@ -66,7 +87,7 @@
 
     </div>
     <div id="footer">{{>footer}}</div>
-     <script src="/js/app.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 
 </html>

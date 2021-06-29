@@ -6,9 +6,9 @@ var dbUrl =
 const db = spicedPG(dbUrl);
 
 
-const resultsData = (findtheright, togetthehost, slots, atf_channel, contentTyp, adunitstructure) => {
+const resultsData = (findtheright, togetthehost, atf_sdk, slots, atf_channel, contentTyp, adunitstructure) => {
     return db.query(
-        "INSERT INTO jsonresults ( findtheright,togetthehost,slots,atf_channel,contentTyp,adunitstructure) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id; ", [findtheright, togetthehost, slots, atf_channel, contentTyp, adunitstructure]
+        "INSERT INTO jsonresults ( findtheright,togetthehost,atf_sdk,slots,atf_channel,contentTyp,adunitstructure) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING id; ", [findtheright, togetthehost, atf_sdk, slots, atf_channel, contentTyp, adunitstructure]
     );
 };
 

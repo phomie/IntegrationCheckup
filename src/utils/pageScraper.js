@@ -41,6 +41,7 @@ const scraperObject = {
 
         let scrapedData = [];
 
+
         //*** ADslots****************************************************
         const slots = await page.evaluate(async() => {
 
@@ -57,11 +58,15 @@ const scraperObject = {
             return result;
         });
 
-
+        const atf_sdk = await page.evaluate(async() => {
+            await atf
+            console.log("SDK_loaded")
+            return true
+        });
+        console.log('atf_sdk', typeof(atf_sdk));
 
         //*** dataLayerProof****************************************************
-        const atf_channel = await page.evaluate(async() => {
-
+        atf_channel = await page.evaluate(async() => {
             function findObjectByKey(array, key) {
                 for (var i = 0; i < array.length; i++) {
                     if (array[i][key]) {
@@ -75,18 +80,33 @@ const scraperObject = {
 
             if (objToAnalyse) {
                 return findObjectByKey(dataLayer, theatf)
-            } else {
-                function GetAdKeyValue(object) {
+            } else { // Try to ask for sdk initialization
+                async function GetAdKeyValue(object) {
                     return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-channel")
                 }
-                return GetAdKeyValue()
+
+                if (GetAdKeyValue()) {
+                    return GetAdKeyValue()
+                } else {
+                    thereturn = await atf.getChannel()
+                    return thereturn;
+                }
+
             }
 
         });
+        console.log('atf_channel', atf_channel);
+        if (atf_channel == null) {
+            atf_channel = await page.evaluate(async() => {
+                thechannel = atf.getChannel()
+                return thechannel
 
-        const contentTyp = await page.evaluate(async() => {
+            })
+            console.log('atf_channel afters', atf_channel);
 
+        }
 
+        contentTyp = await page.evaluate(async() => {
 
             function findObjectByKey(array, key) {
                 for (var i = 0; i < array.length; i++) {
@@ -109,6 +129,16 @@ const scraperObject = {
             }
         });
 
+
+        if (contentTyp == null) {
+            contentTyp = await page.evaluate(async() => {
+                thechannel = atf.getContentType()
+                return thechannel
+
+            })
+            console.log('atf_channel afters', atf_channel);
+
+        }
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
         await page.$("div[id^='google_ads_iframe_'] iframe").then(() => {
@@ -190,14 +220,11 @@ const scraperObject = {
         contentTyp1 = JSON.stringify(contentTyp)
         atf_channel1 = JSON.stringify(atf_channel)
             //-----------------DB-Func-------------------------------------------
-        await db.resultsData(findtheright, togetthehost, slots, atf_channel1, contentTyp1, adunitstructure)
+        await db.resultsData(findtheright, togetthehost, atf_sdk, slots, atf_channel1, contentTyp1, adunitstructure)
 
 
 
         //-----------------------------------------------------------------------
-
-
-
 
         // scrapedData.push({ atf_channel }, { contentTyp }, slots, { adunitstructure });
 
