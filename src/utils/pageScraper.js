@@ -63,7 +63,7 @@ const scraperObject = {
             console.log("SDK_loaded")
             return true
         });
-        console.log('atf_sdk', typeof(atf_sdk));
+        //console.log('atf_sdk', typeof(atf_sdk));
 
         //*** dataLayerProof****************************************************
         atf_channel = await page.evaluate(async() => {
@@ -80,7 +80,7 @@ const scraperObject = {
 
             if (objToAnalyse) {
                 return findObjectByKey(dataLayer, theatf)
-            } else { // Try to ask for sdk initialization
+            } else {
                 async function GetAdKeyValue(object) {
                     return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-channel")
                 }
@@ -194,18 +194,6 @@ const scraperObject = {
                 }
             })
 
-
-            /* let initialRequest = true;
-        await page.setRequestInterception(true);
-        page.on('request', request => {
-            // cancel any navigation requests after the initial page.goto
-            if (request.isNavigationRequest() && !initialRequest) {
-                return request.abort();
-            }
-            initialRequest = false;
-            request.continue();
-        });
-*/
         } catch (error) {
             console.log('error', error);
 
@@ -221,8 +209,6 @@ const scraperObject = {
         atf_channel1 = JSON.stringify(atf_channel)
             //-----------------DB-Func-------------------------------------------
         await db.resultsData(findtheright, togetthehost, atf_sdk, slots, atf_channel1, contentTyp1, adunitstructure)
-
-
 
         //-----------------------------------------------------------------------
 

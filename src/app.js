@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
+
 //Path to public folders
 const publicDir = path.join(__dirname, "../public");
 const root_Dir = path.join(__dirname, "../src");

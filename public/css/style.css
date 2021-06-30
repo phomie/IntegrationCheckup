@@ -17,6 +17,7 @@ body {
 #urlcollectorform {
     margin: 37px 0px;
     padding: 0px;
+    height: 25px;
 }
 
 h1 {
@@ -37,10 +38,31 @@ h1 {
 
 .result {
     background: white;
-    padding: 2px 5px 2px 11px;
+    padding: 5px 5px 5px 11px;
     border: 0.2px solid black;
     border-radius: 5px;
-    MARGIN: 5PX;
+    margin: 10px;
+}
+
+.showresult {
+    display: inline-block;
+    margin: 0 0.5rem;
+    padding: 2px 5px 7px 11px;
+}
+
+p:first-child {
+    animation: zoomIn;
+    animation-duration: 5s;
+}
+
+li {
+    padding: 5px;
+    animation: zoomIn;
+    animation-duration: 5s;
+}
+
+.headline {
+    margin-left: 15px;
 }
 
 .is-empty {
@@ -133,19 +155,10 @@ input[list] {
     margin: 15px;
     display: grid;
     margin-top: 15px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 40px;
     grid-template-rows: 140px 311px 1fr 29px;
-    gap: 25px 0px;
+    gap: 40px 0px;
     grid-template-areas: "controller controller controller" "time type type" "adslots adslots adslots" "adunitstruc adunitstruc adunitstruc";
-}
-
-.showresult {
-    display: inline-block;
-    margin: 0 0.5rem;
-    animation: animate__zoomIn;
-    /* referring directly to the animation's @keyframe declaration */
-    animation-duration: 2s;
-    /* don't forget to set a duration! */
 }
 
 .controller {
@@ -162,6 +175,7 @@ input[list] {
 }
 
 .adslots {
+    margin-top: 70px;
     grid-area: adslots;
 }
 

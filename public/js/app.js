@@ -1,15 +1,11 @@
 console.log("i am an js file");
 const weatherform = document.querySelector("#weather");
 const urlcollectorform = document.querySelector("#urlcollectorform");
-
 const urlsearch = document.querySelector("#urlcollector");
 const search = document.querySelector("input");
-
 const messageOne = document.querySelector("#messagone");
 const messageTwo = document.querySelector("#messagtwo");
-
 const jsonTwo8 = document.querySelector("#jsonmessage9");
-
 const jsonOne = document.querySelector("#jsonmessage1");
 const jsonTwo = document.querySelector("#jsonmessage2");
 const jsonTwo2 = document.querySelector("#jsonmessage3");
@@ -60,25 +56,13 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
                 document.getElementById("adunitstruc").appendChild(li);
             });
 
-
-
-
-
-
-
             jsonTwo5.textContent = "The displayed data is from the past 2 min    ";
-            jsonOne.textContent = "atf-ContentTyp:" + JSON.stringify(data[0].contenttyp);
-            jsonTwo2.textContent = "atf-Channel:" + JSON.stringify(data[0].atf_channel);
-            /* jsonTwo3.textContent = "adslots:" + slottys.forEach(function(item) {
-                var li = document.createElement("li");
-                var text = document.createTextNode(item);
-                li.appendChild(text);
-                document.getElementById("slots").appendChild(li);
-            });; */
-            jsonTwo4.textContent = "time:" + data[0].created_at;
-            jsonTwo6.textContent = "url:" + data[0].togetthehost;
-            jsonTwo7.textContent = "random:" + data[0].findtheright;
-            jsonTwo8.textContent = "atf_sdk is set:" + data[0].atf_sdk;
+            jsonOne.textContent = JSON.stringify(data[0].contenttyp);
+            jsonTwo2.textContent = JSON.stringify(data[0].atf_channel);
+            jsonTwo4.textContent = data[0].created_at;
+            jsonTwo6.textContent = data[0].togetthehost;
+            jsonTwo7.textContent = data[0].findtheright;
+            jsonTwo8.textContent = data[0].atf_sdk;
             console.log('data[0].togetthehost', data[0].togetthehost);
 
         })
@@ -100,10 +84,11 @@ function reload() {
 }
 
 
-emptypes = document.querySelectorAll(".result")[0]
+emptypes = document.querySelector(".result > p")[0]
 console.log('emptypes', emptypes);
 
 var observer = new MutationObserver(function(mutations) {
+    console.log("toproof")
     mutations.forEach(function(mutation) {
         console.log(mutation.type);
     });
