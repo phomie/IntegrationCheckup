@@ -1,8 +1,11 @@
 const mysecrectid = require("./utils/pageScraper")
 const spicedPG = require("spiced-pg");
 var dbUrl =
+
     process.env.DATABASE_URL ||
     "postgres:postgres:postgres@localhost:5432/integrationcheck";
+
+console.log('dbUrl', dbUrl);
 const db = spicedPG(dbUrl);
 
 
