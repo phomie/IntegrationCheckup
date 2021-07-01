@@ -2,7 +2,7 @@ const mysecrectid = require("./utils/pageScraper")
 const spicedPG = require("spiced-pg");
 var dbUrl =
     process.env.DATABASE_URL ||
-    "postgres:d500650:d500650@localhost:5432/integrationcheck";
+    "postgres:postgres:postgres@localhost:5432/integrationcheck";
 const db = spicedPG(dbUrl);
 
 

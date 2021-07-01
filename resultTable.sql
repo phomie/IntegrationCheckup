@@ -18,5 +18,4 @@ CREATE TABLE vastresults(
 id SERIAL PRIMARY KEY,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 vast_result TEXT
-
 );
