@@ -14,10 +14,16 @@ body {
     border: 0.1px solid black;
 }
 
-#urlcollectorform {
-    margin: 37px 0px;
-    padding: 0px;
-    height: 25px;
+#urlcollector {
+    padding: 10px 20px 10px 11px;
+    /* border-radius: 5px; */
+    margin: 10px;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -webkit-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -moz-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
 }
 
 h1 {
@@ -26,39 +32,57 @@ h1 {
 
 #main-content {
     margin: 10px;
-    background: lightgrey;
-    width: 800;
+    background: #a0adb1;
+    width: 1800px;
     height: 100%;
     padding: 40px;
-    border-radius: 5px;
-    border: 0.1px solid black;
-    -webkit-box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
-    box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
+    /* border-radius: 5px; */
+    /* border: 0.1px solid black; */
+    -webkit-box-shadow: 5px 4px 4px -1px rgb(0 0 0 / 82%);
+    box-shadow: 5px 4px 4px -1px rgb(0 0 0 / 82%);
 }
 
 .result {
-    background: white;
-    padding: 5px 5px 5px 11px;
-    border: 0.2px solid black;
-    border-radius: 5px;
+    color: floralwhite;
+    background: #6f8eb5;
+    padding: 15px 20px 15px 11px;
+    /* border-radius: 5px; */
     margin: 10px;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -webkit-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -moz-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
 }
 
 .showresult {
     display: inline-block;
     margin: 0 0.5rem;
     padding: 2px 5px 7px 11px;
+    color: floralwhite;
 }
 
 p:first-child {
-    animation: zoomIn;
-    animation-duration: 5s;
+    animation: fadeIn;
+    animation-duration: 10s;
+    color: floralwhite;
 }
 
 li {
     padding: 5px;
-    animation: zoomIn;
-    animation-duration: 5s;
+    animation: fadeIn;
+    animation-duration: 10s;
+    list-style-type: none;
+    color: floralwhite;
+}
+
+li::marker {
+    list-style-type: none;
+}
+
+ul.ba {
+    list-style-type: none;
 }
 
 .headline {
@@ -93,10 +117,15 @@ a {
 
 #searchBTN {
     margin: 26px;
+    padding: 10px 20px 10px 11px;
     background: WHEAT;
     border: 0.2px solid black;
-    border-radius: 5px;
-    -webkit-box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -webkit-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -moz-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
     box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
     cursor: pointer;
 }
@@ -114,12 +143,16 @@ a {
 #reload {
     background: WHEAT;
     border: 0.2px solid black;
-    border-radius: 5px;
-    -webkit-box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
-    box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -webkit-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -moz-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
     cursor: pointer;
     position: sticky;
     margin-bottom: 25px;
+    margin-left: 8px;
 }
 
 #reload:active {
@@ -133,16 +166,27 @@ a {
 }
 
 input[list] {
-    border: 0.2px solid yellow;
     background: lightgrey;
-    border-radius: 5px;
+    padding: 15px 20px 15px 11px;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -webkit-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -moz-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
 }
 
 .data-list-input {
-    border-radius: 5px;
+    margin-left: 5px;
     width: 80px;
     height: 30px;
-    -webkit-box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -webkit-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
+    -moz-box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+    ;
     box-shadow: 5px 4px 4px -1px rgba(0, 0, 0, 0.82);
 }
 
@@ -175,7 +219,7 @@ input[list] {
 }
 
 .adslots {
-    margin-top: 70px;
+    margin-top: 260px;
     grid-area: adslots;
 }
 
