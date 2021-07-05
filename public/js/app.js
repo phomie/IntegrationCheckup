@@ -59,7 +59,7 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
             jsonTwo2.textContent = JSON.stringify(data[0].atf_channel);
             jsonTwo4.textContent = data[0].created_at;
             jsonTwo6.textContent = data[0].togetthehost;
-            jsonTwo7.textContent = data[0].findtheright;
+            /*  jsonTwo7.textContent = data[0].findtheright; */
             jsonTwo8.textContent = data[0].atf_sdk;
             //console.log('data[0].togetthehost', data[0].togetthehost);
             //console.log('data[0].togetthehost', JSON.stringify(data[0].adcallnizer));
