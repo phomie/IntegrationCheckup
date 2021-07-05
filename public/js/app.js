@@ -80,6 +80,9 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
 
             }
 
+
+            document.querySelector('.spinner-displayer').classList.add('loader');
+
         }).catch((error) => {
             console.log('error', error);
             // TODO handle error
@@ -92,3 +95,22 @@ reloadtButton.addEventListener("click", reload, false)
 function reload() {
     reload = location.reload();
 }
+
+function spinner() {
+    const spinnerDisplayer = document.querySelector('.spinner-displayer');
+    const btn = document.querySelector('#searchBTN');
+
+    btn.addEventListener('click', () => {
+        spinnerDisplayer.classList.add('loading');
+    })
+}
+spinner();
+
+
+/* function removespinner() {
+    jsonmessage9 = document.querySelector("#jsonmessage9")
+    jsonmessage9.addEventListener('load', function() {
+        this.classList.remove("loading");
+    });
+}
+removespinner() */
