@@ -45,14 +45,14 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
                 document.getElementById("adslots").appendChild(li);
             });
 
-            aduntistructure = JSON.stringify(data[0].adunitstructure)
-            adunitsplit = aduntistructure.split(',')
-            adunitsplit.forEach(function(item) {
-                var li = document.createElement("li");
-                var text = document.createTextNode(item);
-                li.appendChild(text);
-                document.getElementById("adunitstruc").appendChild(li);
-            });
+            /*    aduntistructure = JSON.stringify(data[0].adunitstructure)
+               adunitsplit = aduntistructure.split(',')
+               adunitsplit.forEach(function(item) {
+                   var li = document.createElement("li");
+                   var text = document.createTextNode(item);
+                   li.appendChild(text);
+                   document.getElementById("adunitstruc").appendChild(li);
+               }); */
 
             jsonTwo5.textContent = "The displayed data is from the past 2 min    ";
             jsonOne.textContent = JSON.stringify(data[0].contenttyp);
