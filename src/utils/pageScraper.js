@@ -76,12 +76,6 @@ const scraperObject = {
         });
         console.log('atf_sdk', atf_sdk);
 
-
-
-
-
-
-
         //*** dataLayerProof****************************************************
 
         atf_channel = await page.evaluate(async() => {
