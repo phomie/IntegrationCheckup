@@ -5,13 +5,13 @@ var dbUrl =
     process.env.DATABASE_URL ||
     "postgres://postgres:try2begood@localhost:5432/integrationcheck";
 
-console.log('dbUrl', dbUrl);
+
 const db = spicedPG(dbUrl);
 
 
-const resultsData = (findtheright, togetthehost, atf_sdk, slots, atf_channel, contentTyp, adunitstructure) => {
+const resultsData = (findtheright, togetthehost, atf_sdk, slots, atf_channel, contentTyp, adunitstructure, adcallnizer) => {
     return db.query(
-        "INSERT INTO jsonresults ( findtheright,togetthehost,atf_sdk,slots,atf_channel,contentTyp,adunitstructure) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING id; ", [findtheright, togetthehost, atf_sdk, slots, atf_channel, contentTyp, adunitstructure]
+        "INSERT INTO jsonresults ( findtheright,togetthehost,atf_sdk,slots,atf_channel,contentTyp,adunitstructure,adcallnizer) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id; ", [findtheright, togetthehost, atf_sdk, slots, atf_channel, contentTyp, adunitstructure, adcallnizer]
     );
 };
 

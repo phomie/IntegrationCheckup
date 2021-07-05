@@ -11,16 +11,21 @@ const scraperObject = {
     url: "freundin.de",
     async scraper(browser, category) {
         let page = await browser.newPage();
+
         console.log(`Navigating to ${this.url}...`);
 
         //await page.tracing.start({  path: "./public/jason/intercepted.json" });
         //var tracing = JSON.parse(await page.tracing.stop());
         //console.log('tracing', tracing);
 
-        const response = await page.goto(this.url, { waitUntil: 'networkidle0' });
+        const response = await page.goto(this.url, { waitUntil: 'networkidle2' });
+
+
 
         var togetthehost = this.url
         const { hostname } = new URL(togetthehost)
+        await page.setDefaultTimeout(0);
+
         var thehost = hostname.split(".")[1];
         //await page.setRequestInterception(false);
         if (thehost == "gofeminin") {
@@ -58,14 +63,27 @@ const scraperObject = {
             return result;
         });
 
+
+        await page.waitForFunction(() => 'atf' in window).then(async() => {
+            console.log("atf is really loaded")
+
+        })
         const atf_sdk = await page.evaluate(async() => {
+
             await atf
             console.log("SDK_loaded")
             return true
         });
-        //console.log('atf_sdk', typeof(atf_sdk));
+        console.log('atf_sdk', atf_sdk);
+
+
+
+
+
+
 
         //*** dataLayerProof****************************************************
+
         atf_channel = await page.evaluate(async() => {
             function findObjectByKey(array, key) {
                 for (var i = 0; i < array.length; i++) {
@@ -141,7 +159,7 @@ const scraperObject = {
         }
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
-        await page.$("div[id^='google_ads_iframe_'] iframe").then(() => {
+        await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
             console.log("iframe found")
 
         })
@@ -162,6 +180,141 @@ const scraperObject = {
             })
             // console.log('thediv', thediv);
         console.log('theAdunit', adunitstructure);
+
+
+
+        //*** adcallnizer****************************************************
+
+
+
+        await page.waitForFunction(() => 'googletag' in window).then(async() => {
+            console.log("googletag_also-Loaded")
+                //  await googletag.pubads().getSlots()
+
+        });
+
+        const adcallnizer = await page.evaluate(async() => {
+
+            await googletag.pubadsReady
+            console.log("googletag_also_also-Loaded")
+                //adsobjects = googletag.pubads().getSlots();
+
+
+            topSlotArr = []
+            console.log('topSlotArr', topSlotArr);
+
+            adsobjects = googletag.pubads().getSlots();
+
+
+            adsobjects.forEach(function(item) {
+                var adslotSizes = item.getSizes();
+
+                if (item.getAdUnitPath().includes('top')) {
+                    thecollected = []
+                    thesize = [];
+                    for (key of adslotSizes) {
+                        const objEntries = Object.entries(key);
+                        thekeys = Object.fromEntries(objEntries)
+                        values = Object.values(thekeys)
+                        valurstring = JSON.stringify(values)
+                        valurstring1 = valurstring.slice(1, -1)
+                        valurstring2 = valurstring1.replace(",", "x")
+                        thesize.push(valurstring2)
+                    }
+                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                    thsizetostring1 = thsizetostring.replace(/"/g, "")
+                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+
+                }
+
+                if (item.getAdUnitPath().includes('vertical_1') || item.getAdUnitPath().includes('vertical')) {
+                    thecollected = []
+                    thesize = [];
+
+                    for (key of adslotSizes) {
+                        const objEntries = Object.entries(key);
+                        thekeys = Object.fromEntries(objEntries)
+                        values = Object.values(thekeys)
+                        valurstring = JSON.stringify(values)
+                        valurstring1 = valurstring.slice(1, -1)
+                        valurstring2 = valurstring1.replace(",", "x")
+                        thesize.push(valurstring2)
+                    }
+                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                    thsizetostring1 = thsizetostring.replace(/"/g, "")
+                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+
+                }
+                if (item.getAdUnitPath().includes('content_1')) {
+                    thecollected = []
+                    thesize = [];
+
+                    for (key of adslotSizes) {
+                        const objEntries = Object.entries(key);
+                        thekeys = Object.fromEntries(objEntries)
+                        values = Object.values(thekeys)
+                        valurstring = JSON.stringify(values)
+                        valurstring1 = valurstring.slice(1, -1)
+                        valurstring2 = valurstring1.replace(",", "x")
+                        thesize.push(valurstring2)
+                    }
+                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                    thsizetostring1 = thsizetostring.replace(/"/g, "")
+                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+
+                }
+                if (item.getAdUnitPath().includes('content_2')) {
+                    thecollected = []
+                    thesize = [];
+
+                    for (key of adslotSizes) {
+                        const objEntries = Object.entries(key);
+                        thekeys = Object.fromEntries(objEntries)
+                        values = Object.values(thekeys)
+                        valurstring = JSON.stringify(values)
+                        valurstring1 = valurstring.slice(1, -1)
+                        valurstring2 = valurstring1.replace(",", "x")
+                        thesize.push(valurstring2)
+                    }
+                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                    thsizetostring1 = thsizetostring.replace(/"/g, "")
+                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+
+                }
+                if (item.getAdUnitPath().includes('footer')) {
+                    thecollected = []
+                    thesize = [];
+
+                    for (key of adslotSizes) {
+                        const objEntries = Object.entries(key);
+                        thekeys = Object.fromEntries(objEntries)
+                        values = Object.values(thekeys)
+                        valurstring = JSON.stringify(values)
+                        valurstring1 = valurstring.slice(1, -1)
+                        valurstring2 = valurstring1.replace(",", "x")
+                        thesize.push(valurstring2)
+                    }
+                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                    thsizetostring1 = thsizetostring.replace(/"/g, "")
+                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+
+                }
+
+                topSlotArr.push(thecollected)
+            })
+
+            return topSlotArr;
+
+        });
+        console.log('googletag', adcallnizer)
+
+
+
+
+
+
+
+
         //VASTCHECK****************************************
         try {
             thevidopla = await page.$("div.item-media__wrapper").then(console.log("vid found"))
@@ -199,6 +352,15 @@ const scraperObject = {
 
         }
 
+
+
+
+
+
+
+
+
+
         console.log('dataLayer2', contentTyp);
         console.log('dataLayer', atf_channel);
         console.log('theAdunit', adunitstructure);
@@ -208,7 +370,7 @@ const scraperObject = {
         contentTyp1 = JSON.stringify(contentTyp)
         atf_channel1 = JSON.stringify(atf_channel)
             //-----------------DB-Func-------------------------------------------
-        await db.resultsData(findtheright, togetthehost, atf_sdk, slots, atf_channel1, contentTyp1, adunitstructure)
+        await db.resultsData(findtheright, togetthehost, atf_sdk, slots, atf_channel1, contentTyp1, adunitstructure, { adcallnizer })
 
         //-----------------------------------------------------------------------
 

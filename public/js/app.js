@@ -38,8 +38,6 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
             console.log('thesec', thesec);
             var slottys = thesec.split(',')
 
-
-
             slottys.forEach(function(item) {
                 var li = document.createElement("li");
                 var text = document.createTextNode(item);
@@ -63,17 +61,29 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
             jsonTwo6.textContent = data[0].togetthehost;
             jsonTwo7.textContent = data[0].findtheright;
             jsonTwo8.textContent = data[0].atf_sdk;
-            console.log('data[0].togetthehost', data[0].togetthehost);
+            //console.log('data[0].togetthehost', data[0].togetthehost);
+            //console.log('data[0].togetthehost', JSON.stringify(data[0].adcallnizer));
 
-        })
+            const trytowork = data[0].adcallnizer.adcallnizer
+            for (key of trytowork) {
+                const objEntries = Object.entries(key);
+                thekeys = Object.fromEntries(objEntries)
+                values = Object.values(thekeys)
+                valurstring = JSON.stringify(values)
+                valurstring1 = valurstring.slice(1, -1)
+                valurstring2 = valurstring1.replace(",", "    =    ")
+                li = document.createElement("li");
+                var text = document.createTextNode(valurstring2);
+                li.appendChild(text);
+                document.getElementById("adcallnizer").appendChild(li);
 
 
-    .catch((error) => {
-        console.log('error', error);
-        // TODO handle error
-    });
+            }
 
-
+        }).catch((error) => {
+            console.log('error', error);
+            // TODO handle error
+        });
 })
 
 const reloadtButton = document.querySelector("#reload");
@@ -82,21 +92,3 @@ reloadtButton.addEventListener("click", reload, false)
 function reload() {
     reload = location.reload();
 }
-
-
-emptypes = document.querySelector(".result > p")[0]
-console.log('emptypes', emptypes);
-
-var observer = new MutationObserver(function(mutations) {
-    console.log("toproof")
-    mutations.forEach(function(mutation) {
-        console.log(mutation.type);
-    });
-});
-
-var config = { attributes: true, childList: true, characterData: true };
-
-observer.observe(emptypes, config);
-
-// später: Observation wieder einstellen
-observer.disconnect();

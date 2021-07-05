@@ -11,7 +11,8 @@ atf_sdk BOOLEAN NOT NULL,
 slots jsonb,
 atf_channel jsonb,
 contentTyp jsonb,
-adunitstructure jsonb
+adunitstructure jsonb,
+adcallnizer jsonb
 );
 
 CREATE TABLE vastresults(
