@@ -46,111 +46,151 @@ const scraperObject = {
 
         let scrapedData = [];
 
-
-        //*** ADslots****************************************************
-        const slots = await page.evaluate(async() => {
-
-            let adSlotObj = {};
-            const result = {};
-            const element = document.querySelectorAll("atf-ad-slot");
-
-            for (var i = 0; i < element.length; i++) {
-                //element[i].querySelectorAll('*').forEach(d => d.remove());
-                adSlotObj[i] = element[i].outerHTML.split(">")[0];
-                result["Adslots"] = adSlotObj;
-            }
-
-            return result;
-        });
-
-
         await page.waitForFunction(() => 'atf' in window).then(async() => {
             console.log("atf is really loaded")
+
 
         })
         const atf_sdk = await page.evaluate(async() => {
 
+
             await atf
-            console.log("SDK_loaded")
+
+
+
             return true
+
         });
         console.log('atf_sdk', atf_sdk);
+
+
+        //*** ADslots****************************************************
+        const slots = await page.evaluate(async() => {
+
+            try {
+
+                let adSlotObj = {};
+                const result = {};
+                const element = document.querySelectorAll("atf-ad-slot");
+
+                for (var i = 0; i < element.length; i++) {
+                    //element[i].querySelectorAll('*').forEach(d => d.remove());
+                    adSlotObj[i] = element[i].outerHTML.split(">")[0];
+                    result["Adslots"] = adSlotObj;
+                }
+
+                return result;
+
+            } catch (e) {
+
+                logMyErrors(e);
+                return "there is something wrong with the adslots"
+            }
+
+
+
+
+
+        });
+
+
 
         //*** dataLayerProof****************************************************
 
         atf_channel = await page.evaluate(async() => {
-            function findObjectByKey(array, key) {
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i][key]) {
-                        return array[i];
+
+            try {
+                function findObjectByKey(array, key) {
+                    for (var i = 0; i < array.length; i++) {
+                        if (array[i][key]) {
+                            return array[i];
+                        }
                     }
+                    return "there is something wrong with the atf Channel";
                 }
-                return null;
-            }
-            theatf = "atf-channel";
-            objToAnalyse = findObjectByKey(dataLayer, theatf);
+                theatf = "atf-channel";
+                objToAnalyse = findObjectByKey(dataLayer, theatf);
 
-            if (objToAnalyse) {
-                return findObjectByKey(dataLayer, theatf)
-            } else {
-                async function GetAdKeyValue(object) {
-                    return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-channel")
-                }
-
-                if (GetAdKeyValue()) {
-                    return GetAdKeyValue()
+                if (objToAnalyse) {
+                    return findObjectByKey(dataLayer, theatf)
                 } else {
-                    thereturn = await atf.getChannel()
-                    return thereturn;
-                }
+                    async function GetAdKeyValue(object) {
+                        return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-channel")
+                    }
+                    if (GetAdKeyValue()) {
+                        return GetAdKeyValue()
+                    } else {
+                        thereturn = "ksdjfosdjfiojsdoijfijosf" /*  await atf.getChannel() */
+                        return thereturn;
+                    }
 
+                }
+            } catch (e) {
+
+                logMyErrors(e);
+                return "there is something wrong with the atf Channel"
             }
+
+
 
         });
         console.log('atf_channel', atf_channel);
-        if (atf_channel == null) {
+        if (atf_channel == null || thehost == "netdoktor") {
             atf_channel = await page.evaluate(async() => {
-                thechannel = atf.getChannel()
+                thechannel = dataLayer[1].page.content.bcn.channel
+
                 return thechannel
 
             })
-            console.log('atf_channel afters', atf_channel);
-
         }
 
         contentTyp = await page.evaluate(async() => {
-
-            function findObjectByKey(array, key) {
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i][key]) {
-                        return array[i];
+            try {
+                function findObjectByKey(array, key) {
+                    for (var i = 0; i < array.length; i++) {
+                        if (array[i][key]) {
+                            return array[i];
+                        }
                     }
+                    return "there is something wrong with the atf Contenttype";
                 }
-                return null;
-            }
-            theatf = "atf-contentType";
-            objToAnalyse = findObjectByKey(dataLayer, theatf);
+                theatf = "atf-contentType";
+                objToAnalyse = findObjectByKey(dataLayer, theatf);
 
-            if (objToAnalyse) {
-                return findObjectByKey(dataLayer, theatf)
-            } else {
-                function GetAdKeyValue(object) {
-                    return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-contenttype")
+                if (objToAnalyse) {
+                    return findObjectByKey(dataLayer, theatf)
+                } else {
+                    function GetAdKeyValue(object) {
+                        return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-contenttype")
+                    }
+                    return GetAdKeyValue()
                 }
-                return GetAdKeyValue()
+
+            } catch (e) {
+
+                logMyErrors(e);
+                return "there is something wrong with the atf Channel"
             }
+
+
         });
 
-
-        if (contentTyp == null) {
+        if (contentTyp == null || thehost == "netdoktor") {
             contentTyp = await page.evaluate(async() => {
-                thechannel = atf.getContentType()
-                return thechannel
+                await atf
+                thecontenttype = dataLayer[1].page.content.bcn.contentType
+                return thecontenttype
 
             })
-            console.log('atf_channel afters', atf_channel);
+
 
         }
+        console.log('contentTyppageevaluate', contentTyp);
+
+
+
+
+
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
         await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
@@ -158,28 +198,9 @@ const scraperObject = {
 
         })
 
-        const adunitstructure = await page.evaluate(async() => {
-                let adadunitObj = {};
-                console.log('adadunitObj', adadunitObj);
-                let result1 = {};
-                console.log('result1', result1);
-
-                const element = document.querySelectorAll("div[id^='google_ads_iframe_']");
-                for (var i = 0; i < element.length; i++) {
-                    adadunitObj[i] = element[i].outerHTML.split(" ")[1];
-                    result1 = adadunitObj;
-                }
-
-                return result1;
-            })
-            // console.log('thediv', thediv);
-        console.log('theAdunit', adunitstructure);
-
 
 
         //*** adcallnizer****************************************************
-
-
 
         await page.waitForFunction(() => 'googletag' in window).then(async() => {
             console.log("googletag_also-Loaded")
@@ -304,11 +325,6 @@ const scraperObject = {
 
 
 
-
-
-
-
-
         //VASTCHECK****************************************
         try {
             thevidopla = await page.$("div.item-media__wrapper").then(console.log("vid found"))
@@ -347,24 +363,16 @@ const scraperObject = {
         }
 
 
-
-
-
-
-
-
-
-
         console.log('dataLayer2', contentTyp);
         console.log('dataLayer', atf_channel);
-        console.log('theAdunit', adunitstructure);
+        /*  console.log('theAdunit', adunitstructure); */
 
         findtheright = this.findtheright
         console.log('findtherightcontentTyp', findtheright);
         contentTyp1 = JSON.stringify(contentTyp)
         atf_channel1 = JSON.stringify(atf_channel)
             //-----------------DB-Func-------------------------------------------
-        await db.resultsData(findtheright, togetthehost, atf_sdk, slots, atf_channel1, contentTyp1, adunitstructure, { adcallnizer })
+        await db.resultsData(findtheright, togetthehost, atf_sdk, slots, atf_channel1, contentTyp1, /* adunitstructure */ { adcallnizer })
 
         //-----------------------------------------------------------------------
 

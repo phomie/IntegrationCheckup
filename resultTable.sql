@@ -1,7 +1,5 @@
 DROP TABLE IF EXISTS jsonresults;
 
-
-
 CREATE TABLE jsonresults(
 id SERIAL PRIMARY KEY,
 created_at TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
@@ -11,7 +9,6 @@ atf_sdk BOOLEAN NOT NULL,
 slots jsonb,
 atf_channel jsonb,
 contentTyp jsonb,
-adunitstructure jsonb,
 adcallnizer jsonb
 );
 

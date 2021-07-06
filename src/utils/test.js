@@ -271,3 +271,74 @@ adsobjects.forEach(function(item) {
     topSlotArr.push(thecollected)
 
 })
+
+
+if (atf_channel == null) {
+    atf_channel = await page.evaluate(async() => {
+        thechannel = atf.getChannel()
+
+        return thechannel
+
+    })
+    console.log('atf_channel afters', atf_channel);
+
+}
+
+
+
+for (key of datalayer) {
+    const objEntries = Object.entries(key);
+    console.log('objEntries', objEntries);
+
+}
+
+obj = dataLayer
+const loopNestedObj = obj => {
+    Object.entries(obj).forEach(([key, val]) => {
+        if (val && typeof val === "object") {
+            console.log('val', val);
+            console.log('loopNestedObj(val)', loopNestedObj(val));
+
+
+
+        } else {
+            console.log("this is the key and value ", key, val);
+
+        }
+    });
+};
+
+obj = dataLayer
+
+const iterate = (obj) => {
+    Object.keys(obj).forEach(key => {
+
+        console.log(`keylwedkölwef: ${key}, valuewerwerwr: ${obj[key]}`)
+
+        if (typeof obj[key] === 'object') {
+            /*    iterate(obj[key]) */
+            console.log('iterate(obj[key])', /* iterate(obj[key]) */ );
+        }
+    })
+}
+
+
+
+console.log('obj', obj);
+for (const [key, value] of Object.entries(obj)) {
+    console.log('[key, value]', [key, value]);
+
+
+    console.log(`${key}: ${value}`);
+
+
+
+}
+
+
+try {
+
+} catch (e) {
+    // Anweisungen für jeden Fehler
+    logMyErrors(e); // Fehler-Objekt an die Error-Funktion geben
+}

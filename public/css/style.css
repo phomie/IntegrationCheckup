@@ -57,7 +57,7 @@
         height: 100%;
         padding: 40px;
         /* border-radius: 5px; */
-        /* border: 0.1px solid black; */
+        border: 0.1px solid black;
         box-shadow: 2px 2px 2px rgb(0 0 0 / 75%);
         ;
         -webkit-box-shadow: 2px 2px 2px rgb(0 0 0 / 75%);
