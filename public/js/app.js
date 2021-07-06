@@ -31,38 +31,50 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
             return resp.json();
         })
         .then(async(data) => {
+            element = data[0].slots.Adslots
+            theadslotstring = []
 
-            console.log('data', data);
-            theadslotstring = JSON.stringify(data[0].slots.Adslots);
-            thesec = theadslotstring.replace(' "adslots:{"0":"" ', '');
-            console.log('thesec', thesec);
-            var slottys = thesec.split(',')
+            for (var prop in element) {
+                theadslotstring.push(element[prop])
+            }
 
-            slottys.forEach(function(item) {
+            theadslotstring.forEach(function(item) {
                 var li = document.createElement("li");
                 var text = document.createTextNode(item);
                 li.appendChild(text);
                 document.getElementById("adslots").appendChild(li);
             });
 
-            /*    aduntistructure = JSON.stringify(data[0].adunitstructure)
-               adunitsplit = aduntistructure.split(',')
-               adunitsplit.forEach(function(item) {
-                   var li = document.createElement("li");
-                   var text = document.createTextNode(item);
-                   li.appendChild(text);
-                   document.getElementById("adunitstruc").appendChild(li);
-               }); */
-
             jsonTwo5.textContent = "The displayed data is from the past 2 min    ";
-            jsonOne.textContent = JSON.stringify(data[0].contenttyp);
-            jsonTwo2.textContent = JSON.stringify(data[0].atf_channel);
+            thecontentypeArr = []
+            thecontentype = data[0].contenttyp
+            for (var prop in thecontentype) {
+                thecontentypeArr.push(thecontentype[prop])
+            }
+
+            thecontentypeArr.forEach(function(item) {
+                var li = document.createElement("li");
+                var text = document.createTextNode(item);
+                li.appendChild(text);
+                document.getElementById("Contenttype").appendChild(li);
+            });
+
+            thechannelArr = []
+            thechannel = data[0].contenttyp
+            for (var prop in thechannel) {
+                thechannelArr.push(thechannel[prop])
+            }
+
+            thechannelArr.forEach(function(item) {
+                var li = document.createElement("li");
+                var text = document.createTextNode(item);
+                li.appendChild(text);
+                document.getElementById("channel").appendChild(li);
+            });
+
             jsonTwo4.textContent = data[0].created_at;
             jsonTwo6.textContent = data[0].togetthehost;
-            /*  jsonTwo7.textContent = data[0].findtheright; */
             jsonTwo8.textContent = data[0].atf_sdk;
-            //console.log('data[0].togetthehost', data[0].togetthehost);
-            //console.log('data[0].togetthehost', JSON.stringify(data[0].adcallnizer));
 
             const trytowork = data[0].adcallnizer.adcallnizer
             for (key of trytowork) {
@@ -79,7 +91,6 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
 
 
             }
-
 
             document.querySelector('.spinner-displayer').classList.add('loader');
 
@@ -105,12 +116,3 @@ function spinner() {
     })
 }
 spinner();
-
-
-/* function removespinner() {
-    jsonmessage9 = document.querySelector("#jsonmessage9")
-    jsonmessage9.addEventListener('load', function() {
-        this.classList.remove("loading");
-    });
-}
-removespinner() */

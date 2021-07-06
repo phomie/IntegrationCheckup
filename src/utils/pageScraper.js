@@ -20,8 +20,6 @@ const scraperObject = {
 
         const response = await page.goto(this.url, { waitUntil: 'networkidle2' });
 
-
-
         var togetthehost = this.url
         const { hostname } = new URL(togetthehost)
         await page.setDefaultTimeout(0);
@@ -70,7 +68,7 @@ const scraperObject = {
 
                 for (var i = 0; i < element.length; i++) {
                     //element[i].querySelectorAll('*').forEach(d => d.remove());
-                    adSlotObj[i] = element[i].outerHTML.split(">")[0];
+                    adSlotObj[i] = element[i].outerHTML;
                     result["Adslots"] = adSlotObj;
                 }
 
@@ -85,7 +83,6 @@ const scraperObject = {
         });
 
 
-
         //*** dataLayerProof****************************************************
 
         atf_channel = await page.evaluate(async() => {
@@ -97,7 +94,7 @@ const scraperObject = {
                             return array[i];
                         }
                     }
-                    return "there is something wrong with the atf Channel";
+                    return null;
                 }
                 theatf = "atf-channel";
                 objToAnalyse = findObjectByKey(dataLayer, theatf);
@@ -116,6 +113,7 @@ const scraperObject = {
                     }
 
                 }
+
             } catch (e) {
 
                 logMyErrors(e);
@@ -143,7 +141,7 @@ const scraperObject = {
                             return array[i];
                         }
                     }
-                    return "there is something wrong with the atf Contenttype";
+                    return null;
                 }
                 theatf = "atf-contentType";
                 objToAnalyse = findObjectByKey(dataLayer, theatf);
