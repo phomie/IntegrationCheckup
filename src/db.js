@@ -15,6 +15,7 @@ const resultsData = (findtheright, togetthehost, atf_sdk, slots, atf_channel, co
     );
 };
 
+
 const resultsVastData = (vast_result) => {
     return db.query(
         "INSERT INTO vastresults ( vast_result) VALUES ($1) RETURNING id; ", [vast_result]
