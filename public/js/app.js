@@ -31,6 +31,7 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
             return resp.json();
         })
         .then(async(data) => {
+            console.log('data', data);
             element = data[0].slots.Adslots
             theadslotstring = []
 
@@ -60,7 +61,7 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
             });
 
             thechannelArr = []
-            thechannel = data[0].contenttyp
+            thechannel = data[0].atf_channel
             for (var prop in thechannel) {
                 thechannelArr.push(thechannel[prop])
             }
