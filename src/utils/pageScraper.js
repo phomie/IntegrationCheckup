@@ -52,12 +52,7 @@ const scraperObject = {
 
         })
         const atf_sdk = await page.evaluate(async() => {
-
-
             await atf
-
-
-
             return true
 
         });
@@ -86,10 +81,6 @@ const scraperObject = {
                 logMyErrors(e);
                 return "there is something wrong with the adslots"
             }
-
-
-
-
 
         });
 
