@@ -4,9 +4,6 @@ let baseDir = path.join(__dirname, '../../public/jason/vast.txt');
 const fs = require('fs');
 const db = require("../db.js");
 
-
-
-
 const scraperObject = {
     url: "freundin.de",
     async scraper(browser, category) {
@@ -45,19 +42,10 @@ const scraperObject = {
         let scrapedData = [];
 
         await page.waitForFunction(() => 'atf' in window).then(async() => {
-                console.log("atf is really loaded")
+            console.log("atf is really loaded")
 
 
-            })
-            /*   const atf_sdk = await page.evaluate(async() => {
-              await atf
-              return true
-
-          });
-    */
-
-
-
+        })
 
         //*** ADslots****************************************************
         const slots = await page.evaluate(async() => {
@@ -129,16 +117,11 @@ const scraperObject = {
         });
         console.log('tryToCheckthefunc', contentTyp);
 
-
-
-
         //*** ADUNITSTRUCTUR_PROOF **********************************************
         await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
             console.log("iframe found")
 
         })
-
-
 
         //*** adcallnizer****************************************************
 
@@ -154,12 +137,10 @@ const scraperObject = {
             console.log("googletag_also_also-Loaded")
                 //adsobjects = googletag.pubads().getSlots();
 
-
             topSlotArr = []
             console.log('topSlotArr', topSlotArr);
 
             adsobjects = googletag.pubads().getSlots();
-
 
             adsobjects.forEach(function(item) {
                 var adslotSizes = item.getSizes();
@@ -178,7 +159,6 @@ const scraperObject = {
                     }
                     thsizetostring = JSON.stringify(thesize).slice(1, -1)
                     thsizetostring1 = thsizetostring.replace(/"/g, "")
-
                     thecollected.push(item.getAdUnitPath(), thsizetostring1)
 
                 }
@@ -264,8 +244,6 @@ const scraperObject = {
         });
         console.log('googletag', adcallnizer)
 
-
-
         //VASTCHECK****************************************
         try {
             thevidopla = await page.$("div.item-media__wrapper").then(console.log("vid found"))
@@ -303,10 +281,9 @@ const scraperObject = {
 
         }
 
-
         console.log('dataLayer2', contentTyp);
         console.log('dataLayer', atf_channel);
-        /*  console.log('theAdunit', adunitstructure); */
+
 
         findtheright = this.findtheright
         console.log('findtherightcontentTyp', findtheright);
