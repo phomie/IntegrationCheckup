@@ -49,29 +49,49 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
             jsonTwo5.textContent = "The displayed data is from the past 2 min    ";
             thecontentypeArr = []
             thecontentype = data[0].contenttyp
-            for (var prop in thecontentype) {
-                thecontentypeArr.push(thecontentype[prop])
-            }
+            console.log('thecontentype', typeof(thecontentype));
 
-            thecontentypeArr.forEach(function(item) {
+            if (typeof thecontentype === 'string' || thecontentype instanceof String) {
+
                 var li = document.createElement("li");
-                var text = document.createTextNode(item);
+                var text = document.createTextNode(thecontentype);
                 li.appendChild(text);
                 document.getElementById("Contenttype").appendChild(li);
-            });
+
+            } else {
+                for (var prop in thecontentype) {
+                    thecontentypeArr.push(thecontentype[prop])
+                }
+                thecontentypeArr.forEach(function(item) {
+                    var li = document.createElement("li");
+                    var text = document.createTextNode(item);
+                    li.appendChild(text);
+                    document.getElementById("Contenttype").appendChild(li);
+                });
+
+            }
 
             thechannelArr = []
             thechannel = data[0].atf_channel
-            for (var prop in thechannel) {
-                thechannelArr.push(thechannel[prop])
-            }
 
-            thechannelArr.forEach(function(item) {
+            if (typeof thechannel === 'string' || thechannel instanceof String) {
                 var li = document.createElement("li");
-                var text = document.createTextNode(item);
+                var text = document.createTextNode(thechannel);
                 li.appendChild(text);
                 document.getElementById("channel").appendChild(li);
-            });
+
+            } else {
+                for (var prop in thechannel) {
+                    thechannelArr.push(thechannel[prop])
+                }
+
+                thechannelArr.forEach(function(item) {
+                    var li = document.createElement("li");
+                    var text = document.createTextNode(item);
+                    li.appendChild(text);
+                    document.getElementById("channel").appendChild(li);
+                });
+            }
 
             jsonTwo4.textContent = data[0].created_at;
             jsonTwo6.textContent = data[0].togetthehost;
@@ -85,6 +105,7 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
                 valurstring = JSON.stringify(values)
                 valurstring1 = valurstring.slice(1, -1)
                 valurstring2 = valurstring1.replace(",", "    =    ")
+                console.log('valurstring2', valurstring2);
                 li = document.createElement("li");
                 var text = document.createTextNode(valurstring2);
                 li.appendChild(text);

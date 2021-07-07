@@ -55,6 +55,19 @@ const scraperObject = {
 
         });
         console.log('atf_sdk', atf_sdk);
+        /* 
+
+                const tryToCheckthefunc = await page.evaluate(async() => {
+                    await atf.getChannel()
+                    thereturn = atf.getChannel()
+                    return thereturn
+
+                });
+                console.log('tryToCheckthefunc', tryToCheckthefunc);
+         */
+
+
+
 
 
         //*** ADslots****************************************************
@@ -227,6 +240,7 @@ const scraperObject = {
                     }
                     thsizetostring = JSON.stringify(thesize).slice(1, -1)
                     thsizetostring1 = thsizetostring.replace(/"/g, "")
+
                     thecollected.push(item.getAdUnitPath(), thsizetostring1)
 
                 }
