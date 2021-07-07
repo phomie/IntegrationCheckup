@@ -126,6 +126,54 @@ if (app.killed === undefined) {
 
 
 
+atf_channel = await page.evaluate(async() => {
+
+    try {
+        function findObjectByKey(array, key) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i][key]) {
+                    return array[i];
+                }
+            }
+            return null;
+        }
+        theatf = "atf-channel";
+        objToAnalyse = findObjectByKey(dataLayer, theatf);
+
+        if (objToAnalyse) {
+            return findObjectByKey(dataLayer, theatf)
+        } else {
+            async function GetAdKeyValue(object) {
+                return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-channel")
+            }
+            if (GetAdKeyValue()) {
+                return GetAdKeyValue()
+            } else {
+                thereturn = "ksdjfosdjfiojsdoijfijosf" /*  await atf.getChannel() */
+                return thereturn;
+            }
+
+        }
+
+    } catch (e) {
+
+        logMyErrors(e);
+        return "there is something wrong with the atf Channel"
+    }
+
+
+
+});
+console.log('atf_channel', atf_channel);
+if (atf_channel == null || thehost == "netdoktor") {
+    atf_channel = await page.evaluate(async() => {
+        thechannel = dataLayer[1].page.content.bcn.channel
+
+        return thechannel
+
+    })
+}
+
 
 
 
@@ -342,3 +390,54 @@ try {
     // Anweisungen für jeden Fehler
     logMyErrors(e); // Fehler-Objekt an die Error-Funktion geben
 }
+
+
+/* 
+
+ */
+
+/* contentTyp = await page.evaluate(async() => {
+            try {
+                function findObjectByKey(array, key) {
+                    for (var i = 0; i < array.length; i++) {
+                        if (array[i][key]) {
+                            return array[i];
+                        }
+                    }
+                    return null;
+                }
+                theatf = "atf-contentType";
+                objToAnalyse = findObjectByKey(dataLayer, theatf);
+
+                if (objToAnalyse) {
+                    return findObjectByKey(dataLayer, theatf)
+                } else {
+                    function GetAdKeyValue(object) {
+                        return document.querySelectorAll('atf-ad-slot')[1].getAttribute("atf-contenttype")
+                    }
+                    return GetAdKeyValue()
+                }
+
+            } catch (e) {
+
+                logMyErrors(e);
+                return "there is something wrong with the atf Channel"
+            }
+
+
+        });
+
+        if (contentTyp == null || thehost == "netdoktor") {
+            contentTyp = await page.evaluate(async() => {
+                await atf
+                thecontenttype = dataLayer[1].page.content.bcn.contentType
+                return thecontenttype
+
+            })
+
+
+        }
+        console.log('contentTyppageevaluate', contentTyp);
+
+
+ */
