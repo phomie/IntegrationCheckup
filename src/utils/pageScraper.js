@@ -23,20 +23,38 @@ const scraperObject = {
 
         var thehost = hostname.split(".")[1];
         //await page.setRequestInterception(false);
+
         if (thehost == "gofeminin") {
             console.log('gofeminin case');
             const thegdprButton = await page.$("div#buttons");
             const thfounbut = await page.waitForSelector("#didomi-notice-agree-button")
             thfounbut.click(console.log("BUTTON_Clicked"));
+        } else if (thehost == "onvista") {
+            console.log('onvista case');
+            const thegdprFRame = await page.$("div#sp_message_container_502127 iframe");
+            const insideframe = await thegdprFRame.contentFrame();
+            const thebuttontoagree = await insideframe.$$("div[class^='message-component ']  > button  ");
+            await thebuttontoagree[1].click();
+        } else if (thehost == "netdoktor") {
+            console.log('netdoktor case');
+            const thegdprFRame = await page.$("div[id='gdpr-consent-tool-wrapper'] iframe");
+            const insideframe = await thegdprFRame.contentFrame();
+            await insideframe.waitForSelector("#save").then(() => console.log("BUTTON_found"));
+            const thebuttontoagree = await insideframe.$("#save");
+            thebuttontoagree.click(console.log("BUTTON_Clicked"));
         } else {
             console.log('else case');
-
-            const thegdprFRame = await page.$("div#gdpr-consent-tool-wrapper iframe");
+            const thegdprFRame = await page.$("div[id^='sp_message_container'] iframe");
             const insideframe = await thegdprFRame.contentFrame();
             await insideframe.waitForSelector("#save").then(() => console.log("BUTTON_found"));
             const thebuttontoagree = await insideframe.$("#save");
             thebuttontoagree.click(console.log("BUTTON_Clicked"));
         }
+
+
+
+
+
 
 
         let scrapedData = [];
@@ -91,7 +109,7 @@ const scraperObject = {
                 page.waitForTimeout(seconds * 1000)
             ]);
         }
-
+        await waitForEvent('atfSdkInitialized', 10000);
         const atf_sdk = await page.evaluate(async() => {
 
             await atf
@@ -99,7 +117,7 @@ const scraperObject = {
         });
         console.log('atf_sdk', atf_sdk);
 
-        await waitForEvent('atfSdkInitialized', 10000);
+
 
         const atf_channel = await page.evaluate(async() => {
             await atf.getChannel()
@@ -135,110 +153,87 @@ const scraperObject = {
 
             await googletag.pubadsReady
             console.log("googletag_also_also-Loaded")
-                //adsobjects = googletag.pubads().getSlots();
 
             topSlotArr = []
-            console.log('topSlotArr', topSlotArr);
-
+            thecollectedTop = []
+            thecollectedcontent = []
+            thecollectedvertical = []
+            thecollectedfooter = []
             adsobjects = googletag.pubads().getSlots();
-
             adsobjects.forEach(function(item) {
                 var adslotSizes = item.getSizes();
-
-                if (item.getAdUnitPath().includes('top')) {
-                    thecollected = []
-                    thesize = [];
+                thesize = [];
+                if (item.getAdUnitPath().includes("top")) {
                     for (key of adslotSizes) {
                         const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries)
+                        thekeys = Object.fromEntries(objEntries) //generating object
                         values = Object.values(thekeys)
                         valurstring = JSON.stringify(values)
                         valurstring1 = valurstring.slice(1, -1)
                         valurstring2 = valurstring1.replace(",", "x")
                         thesize.push(valurstring2)
                     }
+
                     thsizetostring = JSON.stringify(thesize).slice(1, -1)
                     thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+                    thecollectedTop.push(item.getAdUnitPath(), thsizetostring1)
 
                 }
 
-                if (item.getAdUnitPath().includes('vertical_1') || item.getAdUnitPath().includes('vertical')) {
-                    thecollected = []
-                    thesize = [];
+                if (item.getAdUnitPath().includes("content")) {
+                    thecontentsize = []
+                    thecombinearr = []
 
                     for (key of adslotSizes) {
                         const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries)
+                        thekeys = Object.fromEntries(objEntries) //generating object
+                        values = Object.values(thekeys)
+                        valurstring = JSON.stringify(values)
+                        valurstring1 = valurstring.slice(1, -1)
+                        valurstring2 = valurstring1.replace(",", "x")
+                        thecontentsize.push(valurstring2)
+                    }
+
+                    thsizetostring = JSON.stringify(thecontentsize).slice(1, -1)
+                    thsizetostring1 = thsizetostring.replace(/"/g, "")
+                    thecombinearr.push(item.getAdUnitPath(), thsizetostring1)
+                    thecollectedcontent.push(thecombinearr)
+                }
+
+                if (item.getAdUnitPath().includes("vertical")) {
+                    for (key of adslotSizes) {
+                        const objEntries = Object.entries(key);
+                        thekeys = Object.fromEntries(objEntries) //generating object
                         values = Object.values(thekeys)
                         valurstring = JSON.stringify(values)
                         valurstring1 = valurstring.slice(1, -1)
                         valurstring2 = valurstring1.replace(",", "x")
                         thesize.push(valurstring2)
                     }
+
                     thsizetostring = JSON.stringify(thesize).slice(1, -1)
                     thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+                    thecollectedvertical.push(item.getAdUnitPath(), thsizetostring1)
 
                 }
-                if (item.getAdUnitPath().includes('content_1')) {
-                    thecollected = []
-                    thesize = [];
-
+                if (item.getAdUnitPath().includes("footer")) {
                     for (key of adslotSizes) {
                         const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries)
+                        thekeys = Object.fromEntries(objEntries) //generating object
                         values = Object.values(thekeys)
                         valurstring = JSON.stringify(values)
                         valurstring1 = valurstring.slice(1, -1)
                         valurstring2 = valurstring1.replace(",", "x")
                         thesize.push(valurstring2)
                     }
+
                     thsizetostring = JSON.stringify(thesize).slice(1, -1)
                     thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
+                    thecollectedfooter.push(item.getAdUnitPath(), thsizetostring1)
 
                 }
-                if (item.getAdUnitPath().includes('content_2')) {
-                    thecollected = []
-                    thesize = [];
-
-                    for (key of adslotSizes) {
-                        const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries)
-                        values = Object.values(thekeys)
-                        valurstring = JSON.stringify(values)
-                        valurstring1 = valurstring.slice(1, -1)
-                        valurstring2 = valurstring1.replace(",", "x")
-                        thesize.push(valurstring2)
-                    }
-                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
-                    thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
-
-                }
-                if (item.getAdUnitPath().includes('footer')) {
-                    thecollected = []
-                    thesize = [];
-
-                    for (key of adslotSizes) {
-                        const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries)
-                        values = Object.values(thekeys)
-                        valurstring = JSON.stringify(values)
-                        valurstring1 = valurstring.slice(1, -1)
-                        valurstring2 = valurstring1.replace(",", "x")
-                        thesize.push(valurstring2)
-                    }
-                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
-                    thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollected.push(item.getAdUnitPath(), thsizetostring1)
-
-                }
-
-                topSlotArr.push(thecollected)
             })
-
+            topSlotArr.push(thecollectedTop, ...thecollectedcontent, thecollectedvertical, thecollectedfooter)
             return topSlotArr;
 
         });

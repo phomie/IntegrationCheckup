@@ -1,3 +1,22 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "emmet.triggerExpansionOnTab": true,
+    "editor.tabCompletion": "on",
+ 
+"editor.quickSuggestions": true,
+
+
+"editor.acceptSuggestionOnEnter": "on",
+
+"editor.quickSuggestionsDelay": 10,
+
+"editor.wordBasedSuggestions": true,
+
+
+"editor.autoClosingBrackets": "always",
+
+
+"editor.suggestOnTriggerCharacters":true, 
+"editor.autoClosingQuotes": "always"
+
 }
