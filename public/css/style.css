@@ -155,7 +155,7 @@
     #searchBTN {
         margin: 26px;
         padding: 10px 20px 10px 11px;
-        background: WHEAT;
+        background: rgb(24, 102, 128, 0.6);
         border: 0.2px solid black;
         box-shadow: 2px 2px 2px rgb(0 0 0 / 75%);
         ;
@@ -177,7 +177,7 @@
     }
     
     #reload {
-        background: WHEAT;
+        background: rgb(24, 102, 128, 0.6);
         border: 0.2px solid black;
         box-shadow: 2px 2px 2px rgb(0 0 0 / 75%);
         ;
@@ -263,34 +263,43 @@
     }
     
     .loader {
-        display: none;
-        top: 50%;
-        left: 50%;
-        position: absolute;
-        transform: translate(-50%, -50%);
+        visibility: hidden
     }
     
     .loading {
         position: fixed;
-        left: 40%;
-        top: 50%;
+        top: 25%;
+        left: 25%;
+        width: 800px;
+        height: 800px;
         z-index: 1;
-        width: 150px;
-        height: 150px;
         margin: -75px 0 0 -75px;
-        border: 16px solid rgba(24, 102, 128, .3);
+        /* border: 16px solid rgba(24, 102, 128, .3);
         border-radius: 50%;
-        border-top: 16px solid #3498db;
-        width: 400px;
-        height: 400px;
+        border-top: 16px solid #3498db; */
+        background-image: url(/img/logospinner.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-animation: spin 2s linear infinite;
+        -moz-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
     }
     
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
+    @-moz-keyframes spin {
         100% {
+            -moz-transform: rotate(360deg);
+        }
+    }
+    
+    @-webkit-keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    
+    @keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
         }
     }

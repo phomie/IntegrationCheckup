@@ -113,7 +113,7 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
 
 
             }
-
+            document.querySelector('.spinner-displayer').classList.remove("loading")
             document.querySelector('.spinner-displayer').classList.add('loader');
 
         }).catch((error) => {

@@ -442,3 +442,76 @@ try {
 
  */
 https: //www.onvista.de/
+
+
+
+    #round2 {
+        display: block;
+        position: absolute;
+        top: 50 % ;
+        left: 50 % ;
+        height: 50 px;
+        width: 50 px;
+        margin: -25 px 0 0 - 25 px; -
+        webkit - animation: round2 - rotate 3.0 s infinite linear;
+        animation: round2 - rotate 3.0 s infinite linear;
+    }
+
+#
+round2 span {
+    width: 30 px;
+    height: 30 px;
+    display: inline - block;
+    position: absolute;
+    top: 0;
+    background - color: #0057e7;
+    -webkit-animation: round2-bounce 2.0s infinite ease-in-out;
+            animation: round2-bounce 2.0s infinite ease-in-out;
+  }
+  
+  # round2 span: nth - child(2) {
+            top: auto;
+            bottom: 0;
+            background: #008744;
+    -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+  }
+  
+  @-webkit-keyframes round2-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @keyframes round2-rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes round2-bounce {
+    0%, 100% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+    50% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes round2-bounce {
+    0%, 100% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+    50% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
