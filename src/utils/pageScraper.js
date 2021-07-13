@@ -3,73 +3,65 @@ const path = require('path');
 let baseDir = path.join(__dirname, '../../public/jason/vast.txt');
 const fs = require('fs');
 const db = require("../db.js");
+const cmpCases = require("./cmpCases")
 
 const scraperObject = {
     url: "freundin.de",
     async scraper(browser, category) {
         let page = await browser.newPage();
-
         console.log(`Navigating to ${this.url}...`);
 
-        //await page.tracing.start({  path: "./public/jason/intercepted.json" });
-        //var tracing = JSON.parse(await page.tracing.stop());
-        //console.log('tracing', tracing);
+        const thecmp = await page.on('response', async res => {
+            theliveramp = res.url().endsWith('gdpr-liveramp.js')
+            themgmt = res.url().endsWith("wrapperMessagingWithoutDetection.js")
+            thedidomi = res.url().endsWith("a8830a15e1c8c6ed99962b90ba595cce47721001.js")
+            try {
+                if (theliveramp) {
+                    console.log('theliveramp');
+                    await page.waitForTimeout(5000)
+                    const thegdprFRame = await page.$("div[id^='gdpr-consent-tool-wrapper'] iframe");
+                    cmpCases.liveramp(thegdprFRame)
+                } else if (themgmt) {
+                    console.log('themgmt');
+                    await page.waitForTimeout(5000)
+                    const thegdprFRame = await page.$("div[id^='sp_message_container'] iframe");
+                    cmpCases.mgmt(thegdprFRame)
+                } else if (thedidomi) {
+                    console.log('didomi');
+                    await page.waitForTimeout(5000)
+                    const thfounbut = await page.waitForSelector("#didomi-notice-agree-button")
+                    cmpCases.didomi(thfounbut)
+                }
+            } catch (error) {
+                console.log('error', error);
+            }
+
+
+        })
+
 
         const response = await page.goto(this.url, { waitUntil: 'networkidle2' });
 
         var togetthehost = this.url
         const { hostname } = new URL(togetthehost)
-        await page.setDefaultTimeout(0);
-
         var thehost = hostname.split(".")[1];
-        //await page.setRequestInterception(false);
 
-        if (thehost == "gofeminin") {
-            console.log('gofeminin case');
-            const thegdprButton = await page.$("div#buttons");
-            const thfounbut = await page.waitForSelector("#didomi-notice-agree-button")
-            thfounbut.click(console.log("BUTTON_Clicked"));
-        } else if (thehost == "onvista") {
-            console.log('onvista case');
-            const thegdprFRame = await page.$("div#sp_message_container_502127 iframe");
-            const insideframe = await thegdprFRame.contentFrame();
-            const thebuttontoagree = await insideframe.$$("div[class^='message-component ']  > button  ");
-            await thebuttontoagree[1].click();
-        } else if (thehost == "netdoktor") {
-            console.log('netdoktor case');
-            const thegdprFRame = await page.$("div[id='gdpr-consent-tool-wrapper'] iframe");
-            const insideframe = await thegdprFRame.contentFrame();
-            await insideframe.waitForSelector("#save").then(() => console.log("BUTTON_found"));
-            const thebuttontoagree = await insideframe.$("#save");
-            thebuttontoagree.click(console.log("BUTTON_Clicked"));
-        } else {
-            console.log('else case');
-            const thegdprFRame = await page.$("div[id^='sp_message_container'] iframe");
-            const insideframe = await thegdprFRame.contentFrame();
-            await insideframe.waitForSelector("#save").then(() => console.log("BUTTON_found"));
-            const thebuttontoagree = await insideframe.$("#save");
-            thebuttontoagree.click(console.log("BUTTON_Clicked"));
-        }
-
-
-
-
+        //deleted timeout
+        await page.setDefaultTimeout(0);
 
 
 
         let scrapedData = [];
 
-        await page.waitForFunction(() => 'atf' in window).then(async() => {
-            console.log("atf is really loaded")
 
-
-        })
 
         //*** ADslots****************************************************
+        await page.waitForSelector("atf-ad-slot", { visible: true }).then(() => {
+            console.log("slots found")
+
+        })
         const slots = await page.evaluate(async() => {
-
             try {
-
                 let adSlotObj = {};
                 const result = {};
                 const element = document.querySelectorAll("atf-ad-slot");
@@ -89,7 +81,6 @@ const scraperObject = {
             }
 
         });
-
 
         //*** dataLayerProof****************************************************
 
@@ -297,7 +288,7 @@ const scraperObject = {
         }
         let data = await scrapeCurrentPage();
         return data;
-    },
+    }
 };
 
 module.exports = scraperObject;

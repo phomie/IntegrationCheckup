@@ -9,7 +9,7 @@ async function startBrowser() {
         console.log("Opening the browser......");
         browser = await puppeteer.launch({
             //executablePath: '/Applications/Google Chrome.app',
-            headless: true,
+            headless: false,
             args: ["--disable-setuid-sandbox", "--ignoreHTTPSErrors",
                 "--disable-web-security",
                 '--no-sandbox',
