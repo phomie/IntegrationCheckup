@@ -49,18 +49,13 @@ const scraperObject = {
 
         })
 
-
         const response = await page.goto(this.url, { waitUntil: 'networkidle2' });
 
+        //deleted default timeout
 
-        //deleted timeout
         await page.setDefaultTimeout(0);
 
-
-
         let scrapedData = [];
-
-
 
         //*** ADslots****************************************************
 
@@ -76,7 +71,7 @@ const scraperObject = {
                     console.log('element.length < 1', element.length);
                     let adSlotObj = {};
                     let result = {};
-                    adSlotObj = { 0: "There is something wrong with the AdslotSyntax" }
+                    adSlotObj = { 0: "There is something wrong with the Adslot Syntax" }
                     result["Adslots"] = adSlotObj;
                     return result;
                 } else {
