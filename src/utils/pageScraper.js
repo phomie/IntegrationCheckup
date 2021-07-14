@@ -10,8 +10,14 @@ const scraperObject = {
     async scraper(browser, category) {
         let page = await browser.newPage();
         console.log(`Navigating to ${this.url}...`);
+        findtheright = this.findtheright
+        var togetthehost = this.url
+        const { hostname } = new URL(togetthehost)
+        var thehost = hostname.split(".")[1];
 
-        const thecmp = await page.on('response', async res => {
+
+        await page.on('response', async res => {
+
             theliveramp = res.url().endsWith('gdpr-liveramp.js')
             themgmt = res.url().endsWith("wrapperMessagingWithoutDetection.js")
             thedidomi = res.url().endsWith("a8830a15e1c8c6ed99962b90ba595cce47721001.js")
@@ -21,14 +27,19 @@ const scraperObject = {
                     await page.waitForTimeout(5000)
                     const thegdprFRame = await page.$("div[id^='gdpr-consent-tool-wrapper'] iframe");
                     cmpCases.liveramp(thegdprFRame)
+
                 } else if (themgmt) {
                     console.log('themgmt');
+                    /*     mgmtstring = 'mgmt'
+                        cmp.push(mgmtstring) */
                     await page.waitForTimeout(5000)
                     const thegdprFRame = await page.$("div[id^='sp_message_container'] iframe");
                     cmpCases.mgmt(thegdprFRame)
                 } else if (thedidomi) {
                     console.log('didomi');
                     await page.waitForTimeout(5000)
+                        /*  didomistring = 'didomi'
+                         cmp.push(didomistring) */
                     const thfounbut = await page.waitForSelector("#didomi-notice-agree-button")
                     cmpCases.didomi(thfounbut)
                 }
@@ -36,15 +47,11 @@ const scraperObject = {
                 console.log('error', error);
             }
 
-
         })
 
 
         const response = await page.goto(this.url, { waitUntil: 'networkidle2' });
 
-        var togetthehost = this.url
-        const { hostname } = new URL(togetthehost)
-        var thehost = hostname.split(".")[1];
 
         //deleted timeout
         await page.setDefaultTimeout(0);
@@ -56,28 +63,40 @@ const scraperObject = {
 
 
         //*** ADslots****************************************************
+
         await page.waitForSelector("atf-ad-slot", { visible: true }).then(() => {
             console.log("slots found")
 
         })
         const slots = await page.evaluate(async() => {
             try {
-                let adSlotObj = {};
-                const result = {};
-                const element = document.querySelectorAll("atf-ad-slot");
 
-                for (var i = 0; i < element.length; i++) {
-                    //element[i].querySelectorAll('*').forEach(d => d.remove());
-                    adSlotObj[i] = element[i].outerHTML;
+                const element = document.querySelectorAll("atf-ad-slot");
+                if (element.length < 1) {
+                    console.log('element.length < 1', element.length);
+                    let adSlotObj = {};
+                    let result = {};
+                    adSlotObj = { 0: "There is something wrong with the AdslotSyntax" }
                     result["Adslots"] = adSlotObj;
+                    return result;
+                } else {
+                    let adSlotObj = {};
+                    let result = {};
+
+                    for (var i = 0; i < element.length; i++) {
+                        //element[i].querySelectorAll('*').forEach(d => d.remove());
+                        adSlotObj[i] = element[i].outerHTML;
+                        result["Adslots"] = adSlotObj;
+
+                    }
+                    return result;
                 }
 
-                return result;
 
             } catch (e) {
 
-                logMyErrors(e);
-                return "there is something wrong with the adslots"
+                console.log(e);
+                return { 0: "there is something wrong with the adslots" }
             }
 
         });
@@ -102,27 +121,53 @@ const scraperObject = {
         }
         await waitForEvent('atfSdkInitialized', 10000);
         const atf_sdk = await page.evaluate(async() => {
+            try {
+                await atf
+                return true
+            } catch (error) {
+                console.log('error', error);
+                return false
+            }
 
-            await atf
-            return true
         });
         console.log('atf_sdk', atf_sdk);
 
 
 
         const atf_channel = await page.evaluate(async() => {
-            await atf.getChannel()
-            thereturn = atf.getChannel()
-            return thereturn
+
+            try {
+
+                await atf.getChannel()
+                thereturn = atf.getChannel()
+                return thereturn
+
+            } catch (error) {
+                console.log('error', error);
+                return " something wrong with getChannel() "
+            }
+
+
         });
         console.log('tryToCheckthefunc', atf_channel);
 
 
 
         const contentTyp = await page.evaluate(async() => {
-            await atf.getContentType()
-            thereturn = atf.getContentType();
-            return thereturn
+
+            try {
+
+                await atf.getContentType()
+                thereturn = atf.getContentType();
+                return thereturn
+
+            } catch (error) {
+                console.log('error', error);
+                return " Something wrong with atf.getContentType()"
+            }
+
+
+
         });
         console.log('tryToCheckthefunc', contentTyp);
 
@@ -141,91 +186,98 @@ const scraperObject = {
         });
 
         const adcallnizer = await page.evaluate(async() => {
+            try {
 
-            await googletag.pubadsReady
-            console.log("googletag_also_also-Loaded")
+                await googletag.pubadsReady
+                console.log("googletag_also_also-Loaded")
 
-            topSlotArr = []
-            thecollectedTop = []
-            thecollectedcontent = []
-            thecollectedvertical = []
-            thecollectedfooter = []
-            adsobjects = googletag.pubads().getSlots();
-            adsobjects.forEach(function(item) {
-                var adslotSizes = item.getSizes();
-                thesize = [];
-                if (item.getAdUnitPath().includes("top")) {
-                    for (key of adslotSizes) {
-                        const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries) //generating object
-                        values = Object.values(thekeys)
-                        valurstring = JSON.stringify(values)
-                        valurstring1 = valurstring.slice(1, -1)
-                        valurstring2 = valurstring1.replace(",", "x")
-                        thesize.push(valurstring2)
+                topSlotArr = []
+                thecollectedTop = []
+                thecollectedcontent = []
+                thecollectedvertical = []
+                thecollectedfooter = []
+                adsobjects = googletag.pubads().getSlots();
+                adsobjects.forEach(function(item) {
+                    var adslotSizes = item.getSizes();
+                    thesize = [];
+                    if (item.getAdUnitPath().includes("top")) {
+                        for (key of adslotSizes) {
+                            const objEntries = Object.entries(key);
+                            thekeys = Object.fromEntries(objEntries)
+                            values = Object.values(thekeys)
+                            valurstring = JSON.stringify(values)
+                            valurstring1 = valurstring.slice(1, -1)
+                            valurstring2 = valurstring1.replace(",", "x")
+                            thesize.push(valurstring2)
+                        }
+
+                        thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                        thsizetostring1 = thsizetostring.replace(/"/g, "")
+                        thecollectedTop.push(item.getAdUnitPath(), thsizetostring1)
+
                     }
 
-                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
-                    thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollectedTop.push(item.getAdUnitPath(), thsizetostring1)
+                    if (item.getAdUnitPath().includes("content")) {
+                        thecontentsize = []
+                        thecombinearr = []
 
-                }
+                        for (key of adslotSizes) {
+                            const objEntries = Object.entries(key);
+                            thekeys = Object.fromEntries(objEntries)
+                            values = Object.values(thekeys)
+                            valurstring = JSON.stringify(values)
+                            valurstring1 = valurstring.slice(1, -1)
+                            valurstring2 = valurstring1.replace(",", "x")
+                            thecontentsize.push(valurstring2)
+                        }
 
-                if (item.getAdUnitPath().includes("content")) {
-                    thecontentsize = []
-                    thecombinearr = []
-
-                    for (key of adslotSizes) {
-                        const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries) //generating object
-                        values = Object.values(thekeys)
-                        valurstring = JSON.stringify(values)
-                        valurstring1 = valurstring.slice(1, -1)
-                        valurstring2 = valurstring1.replace(",", "x")
-                        thecontentsize.push(valurstring2)
+                        thsizetostring = JSON.stringify(thecontentsize).slice(1, -1)
+                        thsizetostring1 = thsizetostring.replace(/"/g, "")
+                        thecombinearr.push(item.getAdUnitPath(), thsizetostring1)
+                        thecollectedcontent.push(thecombinearr)
                     }
 
-                    thsizetostring = JSON.stringify(thecontentsize).slice(1, -1)
-                    thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecombinearr.push(item.getAdUnitPath(), thsizetostring1)
-                    thecollectedcontent.push(thecombinearr)
-                }
+                    if (item.getAdUnitPath().includes("vertical")) {
+                        for (key of adslotSizes) {
+                            const objEntries = Object.entries(key);
+                            thekeys = Object.fromEntries(objEntries)
+                            values = Object.values(thekeys)
+                            valurstring = JSON.stringify(values)
+                            valurstring1 = valurstring.slice(1, -1)
+                            valurstring2 = valurstring1.replace(",", "x")
+                            thesize.push(valurstring2)
+                        }
 
-                if (item.getAdUnitPath().includes("vertical")) {
-                    for (key of adslotSizes) {
-                        const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries) //generating object
-                        values = Object.values(thekeys)
-                        valurstring = JSON.stringify(values)
-                        valurstring1 = valurstring.slice(1, -1)
-                        valurstring2 = valurstring1.replace(",", "x")
-                        thesize.push(valurstring2)
+                        thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                        thsizetostring1 = thsizetostring.replace(/"/g, "")
+                        thecollectedvertical.push(item.getAdUnitPath(), thsizetostring1)
+
                     }
+                    if (item.getAdUnitPath().includes("footer")) {
+                        for (key of adslotSizes) {
+                            const objEntries = Object.entries(key);
+                            thekeys = Object.fromEntries(objEntries)
+                            values = Object.values(thekeys)
+                            valurstring = JSON.stringify(values)
+                            valurstring1 = valurstring.slice(1, -1)
+                            valurstring2 = valurstring1.replace(",", "x")
+                            thesize.push(valurstring2)
+                        }
 
-                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
-                    thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollectedvertical.push(item.getAdUnitPath(), thsizetostring1)
+                        thsizetostring = JSON.stringify(thesize).slice(1, -1)
+                        thsizetostring1 = thsizetostring.replace(/"/g, "")
+                        thecollectedfooter.push(item.getAdUnitPath(), thsizetostring1)
 
-                }
-                if (item.getAdUnitPath().includes("footer")) {
-                    for (key of adslotSizes) {
-                        const objEntries = Object.entries(key);
-                        thekeys = Object.fromEntries(objEntries) //generating object
-                        values = Object.values(thekeys)
-                        valurstring = JSON.stringify(values)
-                        valurstring1 = valurstring.slice(1, -1)
-                        valurstring2 = valurstring1.replace(",", "x")
-                        thesize.push(valurstring2)
                     }
+                })
+                topSlotArr.push(thecollectedTop, ...thecollectedcontent, thecollectedvertical, thecollectedfooter)
+                return topSlotArr;
 
-                    thsizetostring = JSON.stringify(thesize).slice(1, -1)
-                    thsizetostring1 = thsizetostring.replace(/"/g, "")
-                    thecollectedfooter.push(item.getAdUnitPath(), thsizetostring1)
+            } catch (error) {
+                console.log('error', error);
+                return [{ 1: "somethingwrongwithadcallnizer" }]
+            }
 
-                }
-            })
-            topSlotArr.push(thecollectedTop, ...thecollectedcontent, thecollectedvertical, thecollectedfooter)
-            return topSlotArr;
 
         });
         console.log('googletag', adcallnizer)
@@ -271,8 +323,8 @@ const scraperObject = {
         console.log('dataLayer', atf_channel);
 
 
-        findtheright = this.findtheright
-        console.log('findtherightcontentTyp', findtheright);
+
+
         contentTyp1 = JSON.stringify(contentTyp)
         atf_channel1 = JSON.stringify(atf_channel)
             //-----------------DB-Func-------------------------------------------

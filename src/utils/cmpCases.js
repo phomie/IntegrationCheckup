@@ -1,10 +1,14 @@
 exports.liveramp = async(thegdprFRame) => {
+    try {
+        const insideframe = await thegdprFRame.contentFrame();
+        await insideframe.waitForSelector("#save").then(() => console.log("BUTTON_found"));
+        const thebuttontoagree = await insideframe.$("#save");
+        thebuttontoagree.click(console.log("BUTTON_Clicked"));
 
-    const insideframe = await thegdprFRame.contentFrame();
-    await insideframe.waitForSelector("#save").then(() => console.log("BUTTON_found"));
-    const thebuttontoagree = await insideframe.$("#save");
-    thebuttontoagree.click(console.log("BUTTON_Clicked"));
+    } catch (error) {
+        console.log('error', error);
 
+    }
 }
 
 exports.mgmt = async(thegdprFRame) => {

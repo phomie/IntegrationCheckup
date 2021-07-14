@@ -33,10 +33,20 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
         .then(async(data) => {
             console.log('data', data);
             element = data[0].slots.Adslots
+            element1 = data[0].slots
+            console.log('element1', element1);
+            console.log('element', element);
             theadslotstring = []
+            if (element == undefined) {
+                for (var prop in element1) {
+                    theadslotstring.push(element1[prop])
+                }
 
-            for (var prop in element) {
-                theadslotstring.push(element[prop])
+            } else {
+                for (var prop in element) {
+                    theadslotstring.push(element[prop])
+                }
+
             }
 
             theadslotstring.forEach(function(item) {
