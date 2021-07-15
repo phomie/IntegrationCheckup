@@ -19,8 +19,10 @@
         <div class="container">
             <div class="controller">
                 <button id="reload">REFRESH THE PAGE</button>
+                <div class="tooltip"><span class="tooltiptext"> With this button you must refresh the page </span></div>
                 <form action="/results" method="POST" id="collectorform" type="submit" enctype="multipart/form-data"
                     onsubmit="" autocomplete="off">
+                    <div class="tooltip1"><span class="tooltiptext"> Choose a screensize you want to check</span></div>
                     <div class="data-list-input" style="width:190px;">
                         <select id="screanchoise" class="data-list-input" style="width:190px;" name="screensizes"
                             onfocus="this.value=''">
@@ -32,8 +34,12 @@
                         </select>
 
                     </div>
+                
+                
                     <input type="text" name="userSearchInput" id="urlcollector">
                     <button class="btn btn-outline-secondary" id="searchBTN"> START THE PROCESS</button>
+                     <div class="tooltip2"><span class="tooltiptext"> Fill in an url of the site you want to check</span></div>
+                  
                 </form>
             </div>
 
