@@ -72,8 +72,8 @@ app.post('/results', upload.single('userSearchInput', 'screensizes'), async func
 
 
     } catch (e) {
-        console.log("Cant't stop webserver:", 'error');
-        console.log(e, 'error');
+        /*   console.log("Cant't stop webserver:", 'error');
+          console.log(e, 'error'); */
     }
 
     db.lastEntry(findtheright).then(result => {

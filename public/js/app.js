@@ -32,105 +32,119 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
         })
         .then(async(data) => {
             console.log('data', data);
-            element = data[0].slots.Adslots
-            element1 = data[0].slots
-            console.log('element1', element1);
-            console.log('element', element);
-            theadslotstring = []
-            if (element == undefined) {
-                for (var prop in element1) {
-                    theadslotstring.push(element1[prop])
-                }
+            console.log('data.length ', data.length);
+            if (data.length < 1) {
+
+                document.querySelector('.spinner-displayer').classList.remove("loading")
+                document.querySelector('.spinner-displayer').classList.add("error")
 
             } else {
-                for (var prop in element) {
-                    theadslotstring.push(element[prop])
+
+
+
+                element = data[0].slots.Adslots
+                console.log('element', element);
+                element1 = data[0].slots
+
+
+                theadslotstring = []
+                if (element == undefined) {
+                    for (var prop in element1) {
+                        theadslotstring.push(element1[prop])
+                    }
+
+                } else {
+                    for (var prop in element) {
+                        theadslotstring.push(element[prop])
+                    }
+
                 }
 
-            }
-
-            theadslotstring.forEach(function(item) {
-                var li = document.createElement("li");
-                var text = document.createTextNode(item);
-                li.appendChild(text);
-                document.getElementById("adslots").appendChild(li);
-            });
-
-            jsonTwo5.textContent = "The displayed data is from the past 2 min    ";
-            thecontentypeArr = []
-            thecontentype = data[0].contenttyp
-            console.log('thecontentype', typeof(thecontentype));
-
-            if (typeof thecontentype === 'string' || thecontentype instanceof String) {
-
-                var li = document.createElement("li");
-                var text = document.createTextNode(thecontentype);
-                li.appendChild(text);
-                document.getElementById("Contenttype").appendChild(li);
-
-            } else {
-                for (var prop in thecontentype) {
-                    thecontentypeArr.push(thecontentype[prop])
-                }
-                thecontentypeArr.forEach(function(item) {
+                theadslotstring.forEach(function(item) {
                     var li = document.createElement("li");
                     var text = document.createTextNode(item);
+                    li.appendChild(text);
+                    document.getElementById("adslots").appendChild(li);
+                });
+
+                jsonTwo5.textContent = "The displayed data is from the past 2 min    ";
+                thecontentypeArr = []
+                thecontentype = data[0].contenttyp
+                console.log('thecontentype', typeof(thecontentype));
+
+                if (typeof thecontentype === 'string' || thecontentype instanceof String) {
+
+                    var li = document.createElement("li");
+                    var text = document.createTextNode(thecontentype);
                     li.appendChild(text);
                     document.getElementById("Contenttype").appendChild(li);
-                });
 
-            }
+                } else {
+                    for (var prop in thecontentype) {
+                        thecontentypeArr.push(thecontentype[prop])
+                    }
+                    thecontentypeArr.forEach(function(item) {
+                        var li = document.createElement("li");
+                        var text = document.createTextNode(item);
+                        li.appendChild(text);
+                        document.getElementById("Contenttype").appendChild(li);
+                    });
 
-            thechannelArr = []
-            thechannel = data[0].atf_channel
-
-            if (typeof thechannel === 'string' || thechannel instanceof String) {
-                var li = document.createElement("li");
-                var text = document.createTextNode(thechannel);
-                li.appendChild(text);
-                document.getElementById("channel").appendChild(li);
-
-            } else {
-                for (var prop in thechannel) {
-                    thechannelArr.push(thechannel[prop])
                 }
 
-                thechannelArr.forEach(function(item) {
+                thechannelArr = []
+                thechannel = data[0].atf_channel
+
+                if (typeof thechannel === 'string' || thechannel instanceof String) {
                     var li = document.createElement("li");
-                    var text = document.createTextNode(item);
+                    var text = document.createTextNode(thechannel);
                     li.appendChild(text);
                     document.getElementById("channel").appendChild(li);
-                });
+
+                } else {
+                    for (var prop in thechannel) {
+                        thechannelArr.push(thechannel[prop])
+                    }
+
+                    thechannelArr.forEach(function(item) {
+                        var li = document.createElement("li");
+                        var text = document.createTextNode(item);
+                        li.appendChild(text);
+                        document.getElementById("channel").appendChild(li);
+                    });
+                }
+
+                jsonTwo4.textContent = data[0].created_at;
+                jsonTwo6.textContent = data[0].togetthehost;
+                jsonTwo8.textContent = data[0].atf_sdk;
+
+                const trytowork = data[0].adcallnizer.adcallnizer
+                for (key of trytowork) {
+                    const objEntries = Object.entries(key);
+                    thekeys = Object.fromEntries(objEntries)
+                    values = Object.values(thekeys)
+                    valurstring = JSON.stringify(values)
+                    valurstring1 = valurstring.slice(1, -1)
+                    valurstring2 = valurstring1.replace(",", "    =    ")
+                    console.log('valurstring2', valurstring2);
+                    li = document.createElement("li");
+                    var text = document.createTextNode(valurstring2);
+                    li.appendChild(text);
+                    document.getElementById("adcallnizer").appendChild(li);
+
+
+                }
+                document.querySelector('.spinner-displayer').classList.remove("loading")
+
             }
-
-            jsonTwo4.textContent = data[0].created_at;
-            jsonTwo6.textContent = data[0].togetthehost;
-            jsonTwo8.textContent = data[0].atf_sdk;
-
-            const trytowork = data[0].adcallnizer.adcallnizer
-            for (key of trytowork) {
-                const objEntries = Object.entries(key);
-                thekeys = Object.fromEntries(objEntries)
-                values = Object.values(thekeys)
-                valurstring = JSON.stringify(values)
-                valurstring1 = valurstring.slice(1, -1)
-                valurstring2 = valurstring1.replace(",", "    =    ")
-                console.log('valurstring2', valurstring2);
-                li = document.createElement("li");
-                var text = document.createTextNode(valurstring2);
-                li.appendChild(text);
-                document.getElementById("adcallnizer").appendChild(li);
-
-
-            }
-            document.querySelector('.spinner-displayer').classList.remove("loading")
-            document.querySelector('.spinner-displayer').classList.add('loader');
 
         }).catch((error) => {
             console.log('error', error);
             // TODO handle error
         });
 })
+
+/* console.log('data', data); */
 
 const reloadtButton = document.querySelector("#reload");
 reloadtButton.addEventListener("click", reload, false)

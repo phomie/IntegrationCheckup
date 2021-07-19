@@ -53,7 +53,7 @@ const scraperObject = {
 
         //deleted default timeout
 
-        await page.setDefaultTimeout(0);
+        await page.setDefaultTimeout(30000);
 
         let scrapedData = [];
 
@@ -316,9 +316,6 @@ const scraperObject = {
 
         console.log('dataLayer2', contentTyp);
         console.log('dataLayer', atf_channel);
-
-
-
 
         contentTyp1 = JSON.stringify(contentTyp)
         atf_channel1 = JSON.stringify(atf_channel)

@@ -321,6 +321,22 @@
         }
     }
     
+    .error {
+        position: fixed;
+        top: 25%;
+        left: 25%;
+        width: 840px;
+        height: 840px;
+        z-index: 1;
+        margin: -75px 0 0 -75px;
+        /* border: 16px solid rgba(24, 102, 128, .3);
+        border-radius: 50%;
+        border-top: 16px solid #3498db; */
+        background-image: url(/img/error.png);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
     .tooltip {
         position: relative;
         display: inline-block;

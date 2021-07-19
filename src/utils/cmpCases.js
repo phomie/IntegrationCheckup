@@ -12,10 +12,15 @@ exports.liveramp = async(thegdprFRame) => {
 }
 
 exports.mgmt = async(thegdprFRame) => {
+    try {
+        const insideframe = await thegdprFRame.contentFrame();
+        const thebuttontoagree = await insideframe.$$("div[class^='message-component ']  > button  ");
+        await thebuttontoagree[1].click();
+    } catch (error) {
+        console.log('error', error);
 
-    const insideframe = await thegdprFRame.contentFrame();
-    const thebuttontoagree = await insideframe.$$("div[class^='message-component ']  > button  ");
-    await thebuttontoagree[1].click();
+    }
+
 }
 
 exports.didomi = async(thfounbut) => {
