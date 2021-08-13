@@ -24,7 +24,7 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
 
     fetch(event.target.action, {
             method: 'POST',
-            body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            body: new URLSearchParams(new FormData(event.target))
 
         }).then(async(resp) => {
             console.log('resp', resp);
@@ -39,8 +39,6 @@ document.querySelector("#collectorform").addEventListener('submit', (event) => {
                 document.querySelector('.spinner-displayer').classList.add("error")
 
             } else {
-
-
 
                 element = data[0].slots.Adslots
                 console.log('element', element);
