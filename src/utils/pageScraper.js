@@ -166,11 +166,7 @@ const scraperObject = {
         });
         console.log('tryToCheckthefunc', contentTyp);
 
-        //*** ADUNITSTRUCTUR_PROOF **********************************************
-        await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
-            console.log("iframe found")
 
-        })
 
         //*** adcallnizer****************************************************
 
@@ -276,8 +272,12 @@ const scraperObject = {
 
         });
         console.log('googletag', adcallnizer)
+            //*** ADUNITSTRUCTUR_PROOF **********************************************
+        await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
+                console.log("iframe found")
 
-        //VASTCHECK****************************************
+            })
+            //VASTCHECK****************************************
         try {
             thevidopla = await page.$("div.item-media__wrapper").then(console.log("vid found"))
             await page.evaluate(() => {
