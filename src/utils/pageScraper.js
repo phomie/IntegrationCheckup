@@ -15,9 +15,15 @@ const scraperObject = {
         const { hostname } = new URL(togetthehost)
         var thehost = hostname.split(".")[1];
 
-        const username = "Esquire";
-        const password = "D8_Esquire_Launch2020!"
-        await page.authenticate({ username, password });
+
+        if (thehost == "esquire" || thehost == "elle" ||  thehost == "freundin" || thehost == "harpersbazaar" || thehost == "instyle" ||  thehost == "") {
+
+            const username = "Esquire";
+            const password = "D8_Esquire_Launch2020!"
+            await page.authenticate({ username, password });
+
+        }
+
 
 
         await page.on('response', async res => {
