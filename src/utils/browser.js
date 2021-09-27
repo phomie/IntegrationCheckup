@@ -6,6 +6,10 @@ async function startBrowser() {
         width = width
         height = height
 
+
+
+
+
         console.log("Opening the browser......");
         browser = await puppeteer.launch({
             //executablePath: '/Applications/Google Chrome.app',
@@ -17,6 +21,7 @@ async function startBrowser() {
                 `--window-size=${width},${height}`,
                 '--enable-features=NetworkService',
                 '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"'
+
             ],
             defaultViewport: null,
 
