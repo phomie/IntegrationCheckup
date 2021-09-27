@@ -16,8 +16,6 @@ async function startBrowser() {
                 '--disable-features=IsolateOrigins,site-per-process',
                 `--window-size=${width},${height}`,
                 '--enable-features=NetworkService',
-                '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"'
-
             ],
             defaultViewport: null,
 

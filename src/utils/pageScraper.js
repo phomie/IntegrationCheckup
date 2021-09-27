@@ -13,21 +13,20 @@ const scraperObject = {
         findtheright = this.findtheright
         var togetthehost = this.url
         const { hostname } = new URL(togetthehost)
-        var thehost = hostname.split(".")[1];
+        var thehost = hostname.split(".")[0];
+        var thehost1 = hostname.split(".")[1];
+        var thehost2 = hostname.split(".")[2];
 
-
-        if (thehost == "esquire" || thehost == "elle" ||  thehost == "freundin" || thehost == "harpersbazaar" || thehost == "instyle") {
-
+        if ((thehost == "staging" && thehost1 == "tech" && thehost2 == "esquire") || (thehost == "staging" && thehost1 == "tech" && thehost2 == "instyle")) {
             const username = "Esquire";
             const password = "D8_Esquire_Launch2020!"
             await page.authenticate({ username, password });
-
         }
 
 
 
-        await page.on('response', async res => {
 
+        await page.on('response', async res => {
             theliveramp = res.url().endsWith('gdpr-liveramp.js')
             themgmt = res.url().endsWith("wrapperMessagingWithoutDetection.js")
             thedidomi = res.url().endsWith("a8830a15e1c8c6ed99962b90ba595cce47721001.js")
