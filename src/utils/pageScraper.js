@@ -14,9 +14,9 @@ const scraperObject = {
         var togetthehost = this.url
         const { hostname } = new URL(togetthehost)
         var thehost = hostname.split(".")[1];
-        const username = ' user';
-        const password = 'D8_Esquire_Launch2020!';
 
+        const username = "Esquire";
+        const password = "D8_Esquire_Launch2020!"
         await page.authenticate({ username, password });
 
 
