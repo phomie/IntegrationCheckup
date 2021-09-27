@@ -16,7 +16,7 @@ const scraperObject = {
         var thehost = hostname.split(".")[1];
 
 
-        if (thehost == "esquire" || thehost == "elle" ||  thehost == "freundin" || thehost == "harpersbazaar" || thehost == "instyle" ||  thehost == "") {
+        if (thehost == "esquire" || thehost == "elle" ||  thehost == "freundin" || thehost == "harpersbazaar" || thehost == "instyle") {
 
             const username = "Esquire";
             const password = "D8_Esquire_Launch2020!"
