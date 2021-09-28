@@ -25,7 +25,7 @@
                     <div class="tooltip1"><span class="tooltiptext"> Choose a screensize you want to check</span></div>
                     <div class="data-list-input" style="width:190px;">
                         <select id="screanchoise" class="data-list-input" style="width:190px;" name="screensizes"
-                            onfocus="this.value=''">
+                            onfocus="this.value">
                             <option id="Desktop" value="2560x1440">Desktop - 2560x1440</option>
                             <option id="SmallDesktop" value="2186x1120">SmallDesktop - 2186x1120</option>
                             <option id="SmallerDesktop" value="1320x852">SmallerDesktop - 1320x852</option>
@@ -36,9 +36,15 @@
                     </div>
                 
                 
-                    <input type="text" name="userSearchInput" id="urlcollector">
+                    <input type="text" name="userSearchInput" id="urlcollector"  placeholder="URL TO CHECK">
+                     <input type="text" name="username" id="urlcollector" placeholder="UserName" >
+                    <input type="text" name="password" id="urlcollector" placeholder="Password">
                     <button class="btn btn-outline-secondary" id="searchBTN"> START THE PROCESS</button>
                      <div class="tooltip2"><span class="tooltiptext"> Fill in an url of the site you want to check</span></div>
+                   
+
+
+
                   
                 </form>
             </div>

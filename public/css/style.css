@@ -261,16 +261,16 @@
     
     .time {
         grid-area: time;
-        margin-top: 30px;
+        margin-top: 90px;
     }
     
     .type {
         grid-area: type;
-        margin-top: 30px;
+        margin-top: 90px;
     }
     
     .adslots {
-        margin-top: -74px;
+        margin-top: 22px;
         grid-area: adslots;
         padding: 15px 0px 16px 0px;
     }

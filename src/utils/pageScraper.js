@@ -11,23 +11,28 @@ const scraperObject = {
         let page = await browser.newPage();
         console.log(`Navigating to ${this.url}...`);
         findtheright = this.findtheright
+
+        const username = this.username;
+        const password = this.password
+
+
+
+        if (username != "" && password != "") {
+            await page.authenticate({ username, password });
+        }
+
+
         var togetthehost = this.url
         const { hostname } = new URL(togetthehost)
         var thehost = hostname.split(".")[0];
         var thehost1 = hostname.split(".")[1];
         var thehost2 = hostname.split(".")[2];
 
-        if ((thehost == "staging" && thehost1 == "tech" && thehost2 == "esquire") || (thehost == "staging" && thehost1 == "tech" && thehost2 == "instyle")) {
-            const username = "Esquire";
-            const password = "D8_Esquire_Launch2020!"
-            await page.authenticate({ username, password });
-        }
-
 
 
 
         await page.on('response', async res => {
-            theliveramp = res.url().endsWith('gdpr-liveramp.js')
+            theliveramp = await res.url().endsWith('gdpr-liveramp.js')
             themgmt = res.url().endsWith("wrapperMessagingWithoutDetection.js")
             thedidomi = res.url().endsWith("a8830a15e1c8c6ed99962b90ba595cce47721001.js")
             try {
@@ -176,19 +181,19 @@ const scraperObject = {
         console.log('tryToCheckthefunc', contentTyp);
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
-        /* await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
+        await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
             console.log("iframe found")
 
         })
-*/
+
         //*** adcallnizer****************************************************
+        /*
+                await page.waitForFunction(() => 'googletag' in window).then(async() => {
+                    console.log("googletag_also-Loaded")
+                        //  await googletag.pubads().getSlots()
 
-        await page.waitForFunction(() => 'googletag' in window).then(async() => {
-            console.log("googletag_also-Loaded")
-                //  await googletag.pubads().getSlots()
-
-        });
-
+                });
+        */
         const adcallnizer = await page.evaluate(async() => {
             try {
 
@@ -287,6 +292,7 @@ const scraperObject = {
         console.log('googletag', adcallnizer)
 
         //VASTCHECK****************************************
+        /*
         try {
             thevidopla = await page.$("div.item-media__wrapper").then(console.log("vid found"))
             await page.evaluate(() => {
@@ -301,7 +307,7 @@ const scraperObject = {
                     console.log('header: ', response.headers())
                         // const buffer = await response.buffer();
                     thrUrl = response.url()
-                    return theVast = fetch(thrUrl, { "credentials": "include", "headers": { "accept": "application/xml, text/xml, */*; q=0.01", "accept-language": "pl;q=1.3592", "x-requested-with": "XMLHttpRequest" }, "referrerPolicy": "no-referrer-when-downgrade", "body": null, "method": "GET", "mode": "cors" })
+                    return theVast = fetch(thrUrl, { "credentials": "include", "headers": { "accept": "application/xml, text/xml,  q=0.01", "accept-language": "pl;q=1.3592", "x-requested-with": "XMLHttpRequest" }, "referrerPolicy": "no-referrer-when-downgrade", "body": null, "method": "GET", "mode": "cors" })
                         .then(response => {
                             return response.text();
                         }).then(function(vast_result) {
@@ -321,7 +327,7 @@ const scraperObject = {
         } catch (error) {
             console.log('error', error);
 
-        }
+        }*/
 
         console.log('dataLayer2', contentTyp);
         console.log('dataLayer', atf_channel);

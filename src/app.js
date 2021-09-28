@@ -60,14 +60,24 @@ app.post('/results', upload.single('userSearchInput', 'screensizes'), async func
     height = sizes[1]
     console.log('height', height);
 
+    var username = req.body.username
+    var password = req.body.password
+
+
 
     try {
         findtheright = Math.floor(Math.random() * 1000000000 + 1);
         scraperObject.findtheright = findtheright
         scraperObject.url = url;
+
+        scraperObject.username = username;
+        scraperObject.password = password;
+
         let browserInstance = browserObject.startBrowser();
-        browserObject.width = width
-        browserObject.height = height
+        browserObject.width = width;
+        browserObject.height = height;
+        //browserObject.username = username;
+        //browserObject.password = password;
         await scraperController(browserInstance)
 
 
