@@ -1,6 +1,8 @@
 [Service]
 ExecStart=/usr/bin/node /opt/app/app.js
 Restart=always
+RestartSec=1
+User=centos
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=node-app-1

@@ -4,6 +4,8 @@ CREATE TABLE jsonresults(
 id SERIAL PRIMARY KEY,
 created_at TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
 findtheright INTEGER NOT NULL UNIQUE,
+csid INTEGER NOT NULL,
+themecluster VARCHAR NOT NULL,
 togetthehost  VARCHAR NOT NULL,
 atf_sdk BOOLEAN NOT NULL,
 slots jsonb,

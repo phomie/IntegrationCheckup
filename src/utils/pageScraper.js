@@ -71,6 +71,35 @@ const scraperObject = {
 
         let scrapedData = [];
 
+
+        //*** CSID */
+
+        if (thehost1 == "netdoktor") {
+            const csid = await page.evaluate(async() => {
+                try {
+                    thestoredone = dataLayer[0].page.content.csId
+                    console.log('thestoredone', thestoredone);
+                    return thestoredone
+                } catch (error) {
+                    console.log('error', error);
+                    return " something wrong with the csid"
+                }
+            });
+            console.log('csid', csid);
+
+            const themecluster = await page.evaluate(async() => {
+                try {
+                    thecluster = dataLayer[1].page.content.bcn.themeCluster[0]
+                    console.log('thecluster', thecluster);
+                    return thecluster
+                } catch (error) {
+                    console.log('error', error);
+                    return " something wrong with the csid"
+                }
+            });
+            console.log('themecluster', themecluster);
+        }
+
         //*** ADslots****************************************************
 
         await page.waitForSelector("atf-ad-slot", { visible: true }).then(() => {
