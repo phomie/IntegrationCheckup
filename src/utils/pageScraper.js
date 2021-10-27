@@ -34,7 +34,8 @@ const scraperObject = {
         await page.on('response', async res => {
             theliveramp = await res.url().endsWith('gdpr-liveramp.js')
             themgmt = res.url().endsWith("wrapperMessagingWithoutDetection.js")
-            thedidomi = res.url().endsWith("a8830a15e1c8c6ed99962b90ba595cce47721001.js")
+            thedidomi = res.url().endsWith("sdk.privacy-center.org/8b462e24-511c-4ea5-b420-54ac628aaabe/loader.js?target=www.gofeminin.de")
+
             try {
                 if (theliveramp) {
                     console.log('theliveramp');
