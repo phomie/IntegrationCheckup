@@ -28,16 +28,12 @@ const partialspath = path.join(__dirname, "../templates/partials");
 
 const thepathtoscrappedjson = path.join(__dirname, "../public/jason/scrapeddata.json");
 
-
-
-
 app.use(express.static(publicDir));
 
 app.use(function(req, res, next) {
     res.set({ 'Last-Modified': new Date() });
     next()
 });
-
 
 //SetupHanldebar and views Location
 var exphbs = require('express-handlebars')
@@ -116,40 +112,6 @@ app.get("", (req, res) => {
         secTitle: "",
         name: "Paste in the URL you are want to check",
         copyright: "adtechfactory",
-    });
-});
-
-/*
-
-*/
-app.get("/weather", (req, res) => {
-    if (!req.query.urladdress) {
-        return res.send({
-            error: "you must provide an adress",
-        });
-    }
-});
-
-app.get("/about", (req, res) => {
-    res.render("about", {
-        title: "PageScrapper",
-        name: "Marc the coding code is trying to built up an pagescrapper by using pupeteer",
-        copyright: "created by the codingcode marc",
-    });
-});
-
-app.get("/help", (req, res) => {
-    res.render("help", {
-        title: "PageScrapper",
-        name: "this could be used to find the correkt wehn you need it ",
-        copyright: "created by the codingcode marc",
-    });
-});
-app.get("/help/*", (req, res) => {
-    res.render("404Page", {
-        title: "404 Page",
-        errormessage: "Sorry we couldn't find the Helparticle you  are you looking for",
-        copyright: "created by the codingcode marc",
     });
 });
 
