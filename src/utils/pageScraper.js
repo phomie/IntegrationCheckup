@@ -211,38 +211,47 @@ const scraperObject = {
         console.log('tryToCheckthefunc', contentTyp);
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
-        /*await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
+        /*  await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
             console.log("iframe found")
 
         })
+        */
+        await page.evaluate(() => {
+            // document.querySelector("div.cl_nxp_overlay").scrollIntoView({ block: 'start', behavior: 'smooth' });
+            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+
+        })
+
 
         //*** adcallnizer****************************************************
-        /*
-                await page.waitForFunction(() => 'googletag' in window).then(async() => {
-                    console.log("googletag_also-Loaded")
-                        //  await googletag.pubads().getSlots()
 
-                });
-        */
+        await page.waitForFunction(() => 'googletag' in window).then(async() => {
+            console.log("googletag_also-Loaded")
+                //  await googletag.pubads().getSlots()
+
+        });
+
         const adcallnizer = await page.evaluate(async() => {
             try {
 
                 await googletag.pubadsReady
                 console.log("googletag_also_also-Loaded")
-
                 topSlotArr = []
+                console.log('topSlotArr', topSlotArr);
                 thecollectedTop = []
                 thecollectedcontent = []
                 thecollectedvertical = []
                 thecollectedfooter = []
-                adsobjects = googletag.pubads().getSlots();
+
+
+                adsobjects = await googletag.pubads().getSlots();
                 adsobjects.forEach(function(item) {
                     var adslotSizes = item.getSizes();
                     thesize = [];
                     if (item.getAdUnitPath().includes("top")) {
                         for (key of adslotSizes) {
                             const objEntries = Object.entries(key);
-                            thekeys = Object.fromEntries(objEntries)
+                            thekeys = Object.fromEntries(objEntries) //generating object
                             values = Object.values(thekeys)
                             valurstring = JSON.stringify(values)
                             valurstring1 = valurstring.slice(1, -1)
@@ -262,7 +271,7 @@ const scraperObject = {
 
                         for (key of adslotSizes) {
                             const objEntries = Object.entries(key);
-                            thekeys = Object.fromEntries(objEntries)
+                            thekeys = Object.fromEntries(objEntries) //generating object
                             values = Object.values(thekeys)
                             valurstring = JSON.stringify(values)
                             valurstring1 = valurstring.slice(1, -1)
@@ -277,9 +286,12 @@ const scraperObject = {
                     }
 
                     if (item.getAdUnitPath().includes("vertical")) {
+                        thecontentsize = []
+                        thecombinearr = []
+
                         for (key of adslotSizes) {
                             const objEntries = Object.entries(key);
-                            thekeys = Object.fromEntries(objEntries)
+                            thekeys = Object.fromEntries(objEntries) //generating object
                             values = Object.values(thekeys)
                             valurstring = JSON.stringify(values)
                             valurstring1 = valurstring.slice(1, -1)
@@ -289,13 +301,14 @@ const scraperObject = {
 
                         thsizetostring = JSON.stringify(thesize).slice(1, -1)
                         thsizetostring1 = thsizetostring.replace(/"/g, "")
-                        thecollectedvertical.push(item.getAdUnitPath(), thsizetostring1)
+                        thecombinearr.push(item.getAdUnitPath(), thsizetostring1)
+                        thecollectedcontent.push(thecombinearr)
 
                     }
                     if (item.getAdUnitPath().includes("footer")) {
                         for (key of adslotSizes) {
                             const objEntries = Object.entries(key);
-                            thekeys = Object.fromEntries(objEntries)
+                            thekeys = Object.fromEntries(objEntries) //generating object
                             values = Object.values(thekeys)
                             valurstring = JSON.stringify(values)
                             valurstring1 = valurstring.slice(1, -1)
@@ -311,6 +324,8 @@ const scraperObject = {
                 })
                 topSlotArr.push(thecollectedTop, ...thecollectedcontent, thecollectedvertical, thecollectedfooter)
                 return topSlotArr;
+
+
 
             } catch (error) {
                 console.log('error', error);
