@@ -211,7 +211,7 @@ const scraperObject = {
         console.log('tryToCheckthefunc', contentTyp);
 
         //*** ADUNITSTRUCTUR_PROOF **********************************************
-        await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
+        /*await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
             console.log("iframe found")
 
         })
