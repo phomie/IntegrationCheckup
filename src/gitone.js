@@ -9,26 +9,14 @@ const scraperObject = {
     url: "freundin.de",
     async scraper(browser, category) {
         let page = await browser.newPage();
-        //console.log('page', page);
-        await page.setRequestInterception(true);
-        page.on('request', request => {
-          if (request.resourceType() === 'image') {
-            request.abort();
-          } else {
-            request.continue();
-          }
-        });
-       
         console.log(`Navigating to ${this.url}...`);
-
-
-
-        await page.setDefaultTimeout(0);
-        await page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36")
         findtheright = this.findtheright
 
         const username = this.username;
         const password = this.password
+
+
+
         if (username != "" && password != "") {
             await page.authenticate({ username, password });
         }
@@ -39,29 +27,32 @@ const scraperObject = {
         var thehost = hostname.split(".")[0];
         var thehost1 = hostname.split(".")[1];
         var thehost2 = hostname.split(".")[2];
+
+
+
+
         await page.on('response', async res => {
             theliveramp = await res.url().endsWith('gdpr-liveramp.js')
-            themgmt =  await res.url().endsWith("wrapperMessagingWithoutDetection.js")
-            thedidomi = await res.url().endsWith("sdk.privacy-center.org/8b462e24-511c-4ea5-b420-54ac628aaabe/loader.js?target=www.gofeminin.de")
+            themgmt = res.url().endsWith("wrapperMessagingWithoutDetection.js")
+            thedidomi = res.url().endsWith("sdk.privacy-center.org/8b462e24-511c-4ea5-b420-54ac628aaabe/loader.js?target=www.gofeminin.de")
 
             try {
                 if (theliveramp) {
                     console.log('theliveramp');
-                    await page.waitForTimeout(150000)
-                    const thegdprFRame = await page.$("div[id^='gdpr-consent-tool-wrapper'] > iframe");
+                    await page.waitForTimeout(5000)
+                    const thegdprFRame = await page.$("div[id^='gdpr-consent-tool-wrapper'] iframe");
                     cmpCases.liveramp(thegdprFRame)
 
                 } else if (themgmt) {
                     console.log('themgmt');
                     /*     mgmtstring = 'mgmt'
                         cmp.push(mgmtstring) */
-                    await page.waitForTimeout(15000)
-                    const thegdprFRame = await page.$("div[id^='sp_message_'] > iframe");
-                    
+                    await page.waitForTimeout(5000)
+                    const thegdprFRame = await page.$("div[id^='sp_message_container'] iframe");
                     cmpCases.mgmt(thegdprFRame)
                 } else if (thedidomi) {
                     console.log('didomi');
-                    await page.waitForTimeout(15000)
+                    await page.waitForTimeout(5000)
                         /*  didomistring = 'didomi'
                          cmp.push(didomistring) */
                     const thfounbut = await page.waitForSelector("#didomi-notice-agree-button")
@@ -73,10 +64,11 @@ const scraperObject = {
 
         })
 
-     const response = await page.goto(this.url, { waitUntil: 'networkidle2' });
-     //const response = await page.goto(this.url, { waitUntil: 'domcontentloaded' });
+        const response = await page.goto(this.url, { waitUntil: 'networkidle2' });
+
         //deleted default timeout
 
+        await page.setDefaultTimeout(30000);
 
         let scrapedData = [];
 
@@ -221,7 +213,6 @@ const scraperObject = {
         //*** ADUNITSTRUCTUR_PROOF **********************************************
         /*  await page.waitForSelector("div[id^='google_ads_iframe_'] iframe", { visible: true }).then(() => {
             console.log("iframe found")
-
         })
         */
         await page.evaluate(() => {
@@ -234,7 +225,7 @@ const scraperObject = {
         //*** adcallnizer****************************************************
 
         await page.waitForFunction(() => 'googletag' in window).then(async() => {
-            console.log("googletag_also-Loaded_111")
+            console.log("googletag_also-Loaded")
                 //  await googletag.pubads().getSlots()
 
         });
@@ -242,18 +233,19 @@ const scraperObject = {
         const adcallnizer = await page.evaluate(async() => {
             try {
 
-                await googletag.pubadsReady || googletag._loaded_ 
-                console.log("googletag_also_also-Loaded_22222")
+                await googletag.pubadsReady
+                console.log("googletag_also_also-Loaded")
                 topSlotArr = []
                 console.log('topSlotArr', topSlotArr);
                 thecollectedTop = []
                 thecollectedcontent = []
                 thecollectedvertical = []
                 thecollectedfooter = []
+
+
                 adsobjects = await googletag.pubads().getSlots();
                 adsobjects.forEach(function(item) {
                     var adslotSizes = item.getSizes();
-                    console.log('adslotSizes', adslotSizes);
                     thesize = [];
                     if (item.getAdUnitPath().includes("top")) {
                         for (key of adslotSizes) {
@@ -350,7 +342,6 @@ const scraperObject = {
             await page.evaluate(() => {
                 document.querySelector("div.item-media__wrapper").scrollIntoView({ block: 'start', behavior: 'smooth' });
             })
-
             await page.on('response', async response => {
                 therespo = response.url().endsWith('&format=autoplay')
                 if (therespo) {
@@ -375,10 +366,8 @@ const scraperObject = {
                         });
                 }
             })
-
         } catch (error) {
             console.log('error', error);
-
         }*/
 
         console.log('dataLayer2', contentTyp);

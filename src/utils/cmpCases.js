@@ -14,8 +14,10 @@ exports.liveramp = async(thegdprFRame) => {
 exports.mgmt = async(thegdprFRame) => {
     try {
         const insideframe = await thegdprFRame.contentFrame();
-        const thebuttontoagree = await insideframe.$$("div[class^='message-component ']  > button  ");
-        await thebuttontoagree[1].click();
+        console.log('insideframe', insideframe);
+        const thebuttontoagree = await insideframe.$("[class*='message-component message-button no-children focusable sp_choice_type_11']");
+        console.log('thebuttontoagree', thebuttontoagree);
+        await thebuttontoagree.click({ force: true }).then(() => console.log("BUTTON_found"));
     } catch (error) {
         console.log('error', error);
 
