@@ -2,8 +2,9 @@
 Ui Tool to collect data from website to proof integration 
 <h1>IntegrationCheckup 🛒</h1>
 <hl>
- <h2>Collect data from </h2>
- <h2>Manage your campaigns via Overview</h2>
+ <h2>Collect data from a website that is open headless with puppeeter </h2>
+ <h2>Puppeteer is a Node library that provides a high-level API to control headless browsers, such as Google Chrome or Chromium.<br>
+  It allows you to automate tasks related to browser interaction, such as generating screenshots, crawling websites, and testing.</h2>
 <h3>Used technologies:</h3>
 <ul>
  <p>Frontend:</p>
@@ -25,7 +26,7 @@ Ui Tool to collect data from website to proof integration
 </ul>
 
  
-<h3>Usage: Search or Create view </h3>
+<h3>Usage:Collect Data </h3>
 <p>The first view is a serach and create form. The user opens the site and has the option to search for an order in the adserversystem<br>
 If the order exist, the view opens the form with the filled out blanks with the reponse of the key data of the order.<br>
 There are three button displayed: one to create multiple instances of the line item component. One to delete an instance. the other one to delete all<br>  
