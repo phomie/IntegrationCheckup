@@ -18,6 +18,7 @@ Some of the colleagues weren't familiar with working with browser devtools. To s
 <p>Backend:</p>
  <li>NodeJs</li>
  <li>ExpressJS</li>
+  <li>Handlebars</li>
  <li>postgres db</li>
  <li>aws Ec2</li>
  <li>aws Route53</li>
