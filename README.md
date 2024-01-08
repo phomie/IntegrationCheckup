@@ -25,16 +25,16 @@ Some of the colleagues weren't familiar with working with browser devtools. To s
 
  
 <h3>Usage:Collect Data </h3>
-<p>The user opens the view and must paste a URL into the search field.<br>
-Puppeteer opens up a headless Chromium browser and performs tasks like searching for the privacy center and clicking on "Agree to all" so the ad tech could start its job,<br>
-or waiting until some elements are loaded into the DOM and starting to collect data from the data layer or from the DOM tree.<br>
-Or it looks into the video player, searches for specific URLs that are fired, and opens up.
-After all the tasks are done, the data is stored in a database. The last entry is pulled out and displayed to the frontend.   
-
-</p>
-<p> 
-</p>
-
+<ul>
+<li>The user opens the view and must paste a URL into the search field</li>
+ <li>Puppeteer opens up a headless Chromium browser and performs tasks like searching for the privacy center and clicking on "Agree to all" so the ad tech could start its job.</li>
+ <li>Or waiting until some elements are loaded into the DOM and starting to collect data from the data layer or from the DOM tree.</li>
+ <li>Or it looks into the video player, searches for specific URLs that are fired.</li>
+ <li>After all the tasks are done, the data is stored in a database.</li>
+ <li>The last entry is pulled out and displayed to the frontend.   </li>
+ <li></li>
+</ul>
 <p>
 </p>
+
 
