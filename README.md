@@ -3,9 +3,11 @@ Ui Tool to collect data from website to proof integration
 <h1>IntegrationCheckup 🛒</h1>
 <hl>
  <h2>Collect data from a website that is open headless with Google Puppeteer </h2>
- <h2>Puppeteer is a Node library that provides a high-level API to control headless browsers, such as Google Chrome or Chromium.<br>
-  It allows you to automate tasks related to browser interaction, such as generating screenshots, crawling websites, and testing.</h2>
- <h3>Background: this tool was created to automate daily tasks. When a website was assigned to the marketing network, the integrated advertisment technologie must be controlled in the same way. <br>
+
+ <h3>
+  Puppeteer is a Node library that provides a high-level API to control headless browsers, such as Google Chrome or Chromium.<br>
+  It allows you to automate tasks related to browser interaction, such as generating screenshots, crawling websites, and testing.<br>
+  Background: this tool was created to automate daily tasks. When a website was assigned to the marketing network, the integrated advertisment technologie must be controlled in the same way. <br>
  Some of the colleagues wasn't firm to work with browser devtools. To simplify that, they needed only the url, and received the data in a couple of seconds. 
  </h3>
 <h3>Used technologies:</h3>
