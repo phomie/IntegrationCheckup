@@ -1,6 +1,4 @@
-
-Ui Tool to collect data from website to proof integration 
-<h1>IntegrationCheckup 🛒</h1>
+ <h1>IntegrationCheckup 🛒</h1>
 <hl>
  <h2>Collect data from a website that is open headless with Google Puppeteer </h2>
 
